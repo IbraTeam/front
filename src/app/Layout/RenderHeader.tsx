@@ -36,7 +36,7 @@ export const RenderHeader = () => {
   }
 
   const onRegisterClick = () => {
-    navigate(routes.registration())
+    navigate(routes.register())
     if (activeNav) toggleActiveNav()
   }
 
@@ -55,9 +55,9 @@ export const RenderHeader = () => {
             Delievery.Кушац
           </Typography>
 
-          <Link to={routes.root()}>
+          <Link to={routes.keys()}>
             <Typography tag="span" variant="t1" isLink={true}>
-              Меню
+              Ключи
             </Typography>
           </Link>
 
@@ -67,13 +67,11 @@ export const RenderHeader = () => {
       renderUserActions={() => (
         <>
           <ToggleTheme />
-          {!!user.email && (
-            <Button styleType="outlined" alertType="primary" onClick={() => navigate(routes.profile())}>
-              <Typography tag="span" className="ellipsis" variant="empty">
-                {user.email}
-              </Typography>
-            </Button>
-          )}
+          <Button styleType="outlined" alertType="primary" onClick={() => navigate(routes.profile())}>
+            <Typography tag="span" className="ellipsis" variant="empty">
+              {user.email || 'Профиль'}
+            </Typography>
+          </Button>
           {isAuth && (
             <Button styleType="outlined" alertType="danger" onClick={onLogoutClick}>
               Выйти
