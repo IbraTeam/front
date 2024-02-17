@@ -3,5 +3,6 @@ export const routes = {
   login: () => '/login',
   register: () => '/register',
   profile: () => '/profile',
-  keys: () => '/keys'
+  keys: () => '/keys',
+  users: () => '/users'
 }

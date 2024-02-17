@@ -1,4 +1,3 @@
-import { ToggleTheme } from '@/features'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { postLogoutConfig } from '@/shared/api'
@@ -41,7 +40,7 @@ export const RenderHeader = () => {
   }
 
   const onLogoutClick = () => {
-    logoutRequest(postLogoutConfig({ token: user.token }))
+    logoutRequest(postLogoutConfig())
     if (activeNav) toggleActiveNav()
   }
 
@@ -52,7 +51,7 @@ export const RenderHeader = () => {
       renderNavbar={() => (
         <>
           <Typography tag="span" variant="t3">
-            Delievery.Кушац
+            ДЕКАНАТ
           </Typography>
 
           <Link to={routes.keys()}>
@@ -61,17 +60,25 @@ export const RenderHeader = () => {
             </Typography>
           </Link>
 
+          <Link to={routes.users()}>
+            <Typography tag="span" variant="t1" isLink={true}>
+              Пользователи
+            </Typography>
+          </Link>
+
           {isAuth && <div>чтото для авторизованного</div>}
         </>
       )}
       renderUserActions={() => (
         <>
-          <ToggleTheme />
-          <Button styleType="outlined" alertType="primary" onClick={() => navigate(routes.profile())}>
-            <Typography tag="span" className="ellipsis" variant="empty">
-              {user.email || 'Профиль'}
-            </Typography>
-          </Button>
+          {/* <ToggleTheme /> */}
+          {isAuth && (
+            <Button styleType="outlined" alertType="primary" onClick={() => navigate(routes.profile())}>
+              <Typography tag="span" className="ellipsis" variant="empty">
+                {user.email || 'Профиль'}
+              </Typography>
+            </Button>
+          )}
           {isAuth && (
             <Button styleType="outlined" alertType="danger" onClick={onLogoutClick}>
               Выйти

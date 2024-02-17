@@ -8,6 +8,9 @@ interface Validation {
 }
 
 export const validations: InputValidations = {
+  room: {
+    required: { value: true, message: 'Заполните поле' }
+  },
   name: {
     required: { value: true, message: 'Заполните поле' },
     maxLength: { value: 30, message: 'Длина от 2 до 30' },

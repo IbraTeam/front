@@ -1,20 +1,10 @@
 import { ToastContainer } from 'react-toastify'
-import { ButtonLoader, InputBlock } from '@/shared/components'
-import { validations } from '@/shared/const'
-import { Button, Typography } from '@/shared/uikit'
+import { InputBlock } from '@/shared/components'
+import { Typography } from '@/shared/uikit'
 import { useProfilePage } from './useProfilePage'
 
 export const ProfilePage = () => {
-  const {
-    updateProfileLoading,
-    updateProfileError,
-    error,
-    errors,
-    isLoading,
-    userInfo,
-    register,
-    onSubmit
-  } = useProfilePage()
+  const { error, userInfo, onSubmit } = useProfilePage()
 
   return (
     <div>
@@ -23,36 +13,29 @@ export const ProfilePage = () => {
         Профиль
       </Typography>
       <form className="form" onSubmit={onSubmit}>
-        <InputBlock
-          label="ФИО"
-          blockType="row"
-          error={errors.name?.message}
-          {...register('name', validations.name)}
-          ref={register('name', validations.name).ref}
-        />
+        <InputBlock label="ФИО" constValue={userInfo?.name} blockType="row" />
 
         <InputBlock label="Email" constValue={userInfo?.email} blockType="row" />
-
+        {/*
         <Button
           className="btn"
           styleType="solid"
           alertType="info"
           isLoading={isLoading || updateProfileLoading}
-          loader={<ButtonLoader />}
         >
           Обновить
-        </Button>
+        </Button> */}
 
         {!!error && (
           <Typography tag="p" variant="err1">
             Ошибка получения профиля
           </Typography>
         )}
-        {!!updateProfileError && (
+        {/* {!!updateProfileError && (
           <Typography tag="p" variant="err1">
-            Ошибка обновления профиля, проверьте корректность выбора адреса и введенных данных
+            Ошибка обновления профиля
           </Typography>
-        )}
+        )} */}
       </form>
     </div>
   )

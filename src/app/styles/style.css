@@ -33,7 +33,12 @@ body.lock {
 }
 
 .btn {
-  max-width: 140px;
+  max-width: 180px;
+}
+
+.btn2 {
+  max-width: 220px;
+  line-height: normal;
 }
 
 .btn.big {

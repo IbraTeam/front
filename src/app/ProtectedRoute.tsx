@@ -4,7 +4,14 @@ import { useUserContext } from '@/shared/lib/contexts'
 
 export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const location = useLocation()
-  const { isAuth } = useUserContext()
+  const {
+    isAuth,
+    user: { role }
+  } = useUserContext()
 
-  return isAuth ? children : <Navigate to={routes.login()} replace state={{ from: location }} />
+  return isAuth && role === 'DEAN' ? (
+    children
+  ) : (
+    <Navigate to={routes.login()} replace state={{ from: location }} />
+  )
 }

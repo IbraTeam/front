@@ -1,4 +1,4 @@
-import { ButtonLoader, InputBlock } from '@/shared/components'
+import { InputBlock } from '@/shared/components'
 import { validations } from '@/shared/const'
 import { Button } from '@/shared/uikit'
 import { useLoginPage } from './useLoginPage'
@@ -24,13 +24,7 @@ export const LoginPage = () => {
           ref={register('password', validations.password).ref}
         />
 
-        <Button
-          className="btn"
-          styleType="solid"
-          alertType="info"
-          isLoading={isLoading}
-          loader={<ButtonLoader />}
-        >
+        <Button className="btn" styleType="solid" alertType="info" isLoading={isLoading}>
           Войти
         </Button>
       </form>
