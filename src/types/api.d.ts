@@ -3,6 +3,18 @@ export {}
 declare global {
   type Role = 'TEACHER' | 'STUDENT' | 'DEAN' | 'ADMIN' | 'USER'
   type KeyStatus = 'IN_DEAN' | 'ON_HANDS' | 'TRANSFERRING' | 'OFFERING_TO_YOU'
+  type Status = 'Accepted' | 'Rejected' | 'Pending'
+  type PairNumber =
+    | 'First'
+    | 'Second'
+    | 'Third'
+    | 'Fourth'
+    | 'Fifth'
+    | 'Sixth'
+    | 'Seventh'
+    | 'Eighth'
+    | 'Ninth'
+    | 'Ten'
 
   interface BaseResponse {
     message: string
@@ -63,4 +75,6 @@ declare global {
   interface RoleRequest {
     role: Role
   }
+
+  type TypeBooking = 'Booking' | 'Pair'
 }

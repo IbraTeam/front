@@ -1,4 +1,4 @@
-import { AxiosError, AxiosRequestConfig } from 'axios'
+import { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
 import React from 'react'
 import { apiInstance } from '@/shared/api'
 import { statusCodeErrors } from '@/shared/const'
@@ -11,6 +11,7 @@ interface UseRequestParams<T, D> {
   onSuccess?: (data: T) => void
   onError?: (error?: string) => void
   onFormError?: (errors: FormError<D>[]) => void
+  instance?: AxiosInstance
 }
 
 export const useRequest = <T, D = never>({
@@ -19,7 +20,8 @@ export const useRequest = <T, D = never>({
   duration = 0,
   onSuccess,
   onError,
-  onFormError
+  onFormError,
+  instance = apiInstance
 }: UseRequestParams<T, D>) => {
   const [data, setData] = React.useState<T | null>(null)
   const [error, setError] = React.useState('')
@@ -33,7 +35,7 @@ export const useRequest = <T, D = never>({
     setError('')
 
     try {
-      const response = await apiInstance(config)
+      const response = await instance(config)
       setStatusCode(response.status)
 
       if (response.status >= 300) {

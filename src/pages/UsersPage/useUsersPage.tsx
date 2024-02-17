@@ -21,7 +21,7 @@ export const useUsersPage = () => {
     requestHandler: getUsersHandler
   } = useRequest<UserDto[]>({
     onMount: true,
-    config: getUsersConfig(roles, nameFilter)
+    config: getUsersConfig(searchParams.toString())
   })
 
   const { isLoading: addRoleLoading, requestHandler: addRoleHandler } = useRequest<BaseResponse, Role>({
@@ -46,14 +46,22 @@ export const useUsersPage = () => {
   }
 
   const onNameFilterChange = useDebounceCallback((value: string) => {
+    if (!value.length) {
+      searchParams.delete('name')
+      return
+    }
+
     searchParams.set('name', value)
     setSearchParams(searchParams)
 
-    getUsersHandler(getUsersConfig(roles, value))
+    getUsersHandler(getUsersConfig(searchParams.toString()))
   }, 300)
 
   const onRolesChange = (selectedRoles: MultiValue<RoleOption>) => {
-    if (!selectedRoles) return
+    if (!selectedRoles) {
+      searchParams.delete('roles')
+      return
+    }
 
     searchParams.delete('roles')
     selectedRoles.forEach((role) => {
@@ -62,7 +70,7 @@ export const useUsersPage = () => {
 
     setSearchParams(searchParams)
 
-    getUsersHandler(getUsersConfig(roles, nameFilter))
+    getUsersHandler(getUsersConfig(searchParams.toString()))
   }
 
   return {
