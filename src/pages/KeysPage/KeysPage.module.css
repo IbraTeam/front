@@ -1,0 +1,9 @@
+.form {
+  display: flex;
+  align-self: center;
+  margin: 20px 0;
+}
+
+.inputWrapper {
+  width: 200px;
+}
