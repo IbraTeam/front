@@ -1,11 +1,27 @@
+import { useSearchParams } from 'react-router-dom'
+import { MultiValue } from 'react-select'
+import { useDebounceCallback } from 'usehooks-ts'
 import { deleteRoleConfig, getUsersConfig, patchRoleConfig } from '@/shared/api'
+import { RoleOption } from '@/shared/const'
 import { toastOnErrorRequest, toastOnSuccessRequest } from '@/shared/lib/helpers'
 import { useRequest } from '@/shared/lib/hooks'
 
 export const useUsersPage = () => {
-  const { isLoading: usersLoading, data: users } = useRequest<UserDto[]>({
+  const [searchParams, setSearchParams] = useSearchParams({
+    roles: [],
+    name: ''
+  })
+
+  const roles = searchParams.getAll('roles')
+  const nameFilter = searchParams.get('name')
+
+  const {
+    isLoading: usersLoading,
+    data: users,
+    requestHandler: getUsersHandler
+  } = useRequest<UserDto[]>({
     onMount: true,
-    config: getUsersConfig()
+    config: getUsersConfig(roles, nameFilter)
   })
 
   const { isLoading: addRoleLoading, requestHandler: addRoleHandler } = useRequest<BaseResponse, Role>({
@@ -29,5 +45,36 @@ export const useUsersPage = () => {
     removeRoleHandler(deleteRoleConfig(id, { role }))
   }
 
-  return { usersLoading, users, addRoleLoading, removeRoleLoading, onAddRoleClick, onRemoveRoleClick }
+  const onNameFilterChange = useDebounceCallback((value: string) => {
+    searchParams.set('name', value)
+    setSearchParams(searchParams)
+
+    getUsersHandler(getUsersConfig(roles, value))
+  }, 300)
+
+  const onRolesChange = (selectedRoles: MultiValue<RoleOption>) => {
+    if (!selectedRoles) return
+
+    searchParams.delete('roles')
+    selectedRoles.forEach((role) => {
+      searchParams.append('roles', role.value)
+    })
+
+    setSearchParams(searchParams)
+
+    getUsersHandler(getUsersConfig(roles, nameFilter))
+  }
+
+  return {
+    onNameFilterChange,
+    onRolesChange,
+    roles,
+    nameFilter,
+    usersLoading,
+    users,
+    addRoleLoading,
+    removeRoleLoading,
+    onAddRoleClick,
+    onRemoveRoleClick
+  }
 }

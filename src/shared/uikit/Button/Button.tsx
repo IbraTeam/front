@@ -8,8 +8,8 @@ type ButtonAlertType = 'success' | 'info' | 'danger' | 'primary'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean
-  styleType: ButtonStyleType
-  alertType: ButtonAlertType
+  styleType?: ButtonStyleType
+  alertType?: ButtonAlertType
   loader?: React.ReactNode
 }
 
@@ -18,8 +18,8 @@ const cx = classNames.bind(s)
 export const Button = ({
   children,
   isLoading = false,
-  styleType,
-  alertType,
+  styleType = 'outlined',
+  alertType = 'info',
   loader = <ButtonLoader />,
   ...props
 }: ButtonProps) => (

@@ -37,6 +37,17 @@ export const getAccountUsersConfig: RestRequestConfig = {
           email: 'a@a.ru'
         }
       ]
+    },
+    {
+      entities: { query: { name: 'AAA' } },
+      data: [
+        {
+          id: '5',
+          name: 'AAA',
+          role: 'TEACHER',
+          email: 'a@a.ru'
+        }
+      ]
     }
   ]
 }
