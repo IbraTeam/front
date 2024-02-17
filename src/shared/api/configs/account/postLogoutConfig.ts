@@ -1,8 +1,7 @@
-import { authHeaders } from '../../authHeaders'
 import { config } from '../../config'
 
-export const postLogoutConfig = (token: TokenResponse) =>
+export const postLogoutConfig = () =>
   config<never>({
-    config: { method: 'post', headers: { ...authHeaders(token) } },
+    config: { method: 'post' },
     url: '/account/logout'
   })

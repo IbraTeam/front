@@ -1,7 +1,7 @@
 import { config } from '../../config'
 
-export const getProfileConfig = () =>
+export const getUsersConfig = () =>
   config<never>({
     config: { method: 'get' },
-    url: '/account/profile'
+    url: '/account/users'
   })

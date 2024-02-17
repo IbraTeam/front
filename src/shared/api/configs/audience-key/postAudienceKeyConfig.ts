@@ -1,8 +1,7 @@
-import { authHeaders } from '../../authHeaders'
 import { config } from '../../config'
 
-export const postAudienceKeyConfig = (token: TokenResponse, dto: CreateAudienceKeyDto) =>
+export const postAudienceKeyConfig = (dto: CreateAudienceKeyDto) =>
   config<CreateAudienceKeyDto>({
-    config: { method: 'post', data: dto, headers: { ...authHeaders(token) } },
+    config: { method: 'post', data: dto },
     url: 'audience-key'
   })
