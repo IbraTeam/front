@@ -1,5 +1,5 @@
 import Select from 'react-select'
-import { InputBlock, SearchLoader } from '@/shared/components'
+import { InputBlock, Pagination, SearchLoader } from '@/shared/components'
 import { RoleEnum, RoleOption, roleOptions, selectStyles } from '@/shared/const'
 import { Typography } from '@/shared/uikit'
 import { UserCard } from './components/UserCard/UserCard'
@@ -15,7 +15,8 @@ export const UsersPage = () => {
     roles,
     onRolesChange,
     onNameFilterChange,
-    nameFilter
+    nameFilter,
+    onPageChange
   } = useUsersPage()
 
   return (
@@ -44,7 +45,7 @@ export const UsersPage = () => {
 
       {usersLoading && <SearchLoader />}
       <div className={styles.cards}>
-        {users?.map((user, index) => (
+        {users?.users?.map((user, index) => (
           <UserCard
             key={index}
             user={user}
@@ -53,6 +54,7 @@ export const UsersPage = () => {
           />
         ))}
       </div>
+      {!!users && <Pagination pagination={users.page} onPageChange={onPageChange} />}
     </div>
   )
 }

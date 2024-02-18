@@ -77,4 +77,16 @@ declare global {
   }
 
   type TypeBooking = 'Booking' | 'Pair'
+
+  interface PageResponse {
+    totalPages: number
+    currentPage: number
+    pageSize: number
+    totalElements: number
+  }
+
+  interface UsersResponse {
+    users: UserDto[]
+    page: PageResponse
+  }
 }

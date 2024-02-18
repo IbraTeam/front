@@ -6,11 +6,10 @@ import { RoleOption } from '@/shared/const'
 import { toastOnErrorRequest, toastOnSuccessRequest } from '@/shared/lib/helpers'
 import { useRequest } from '@/shared/lib/hooks'
 
+const NAME_FILTER_DURATION = 400
+
 export const useUsersPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams({
-    roles: [],
-    name: ''
-  })
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const roles = searchParams.getAll('roles')
   const nameFilter = searchParams.get('name')
@@ -19,7 +18,7 @@ export const useUsersPage = () => {
     isLoading: usersLoading,
     data: users,
     requestHandler: getUsersHandler
-  } = useRequest<UserDto[]>({
+  } = useRequest<UsersResponse>({
     onMount: true,
     config: getUsersConfig(searchParams.toString())
   })
@@ -46,16 +45,13 @@ export const useUsersPage = () => {
   }
 
   const onNameFilterChange = useDebounceCallback((value: string) => {
-    if (!value.length) {
-      searchParams.delete('name')
-      return
-    }
+    if (!value.length) searchParams.delete('name')
+    else searchParams.set('name', value)
 
-    searchParams.set('name', value)
     setSearchParams(searchParams)
 
     getUsersHandler(getUsersConfig(searchParams.toString()))
-  }, 300)
+  }, NAME_FILTER_DURATION)
 
   const onRolesChange = (selectedRoles: MultiValue<RoleOption>) => {
     if (!selectedRoles) {
@@ -73,7 +69,15 @@ export const useUsersPage = () => {
     getUsersHandler(getUsersConfig(searchParams.toString()))
   }
 
+  const onPageChange = (page: number) => {
+    searchParams.set('page', String(page))
+    setSearchParams(searchParams)
+
+    getUsersHandler(getUsersConfig(searchParams.toString()))
+  }
+
   return {
+    onPageChange,
     onNameFilterChange,
     onRolesChange,
     roles,
