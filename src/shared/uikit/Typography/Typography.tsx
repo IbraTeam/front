@@ -18,6 +18,7 @@ type TypographyVariant =
   | 'err2'
   | 'h1'
   | 'h2'
+  | 'link'
 
 export interface TypographyProps {
   children?: ReactNode

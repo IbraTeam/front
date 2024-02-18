@@ -1,15 +1,40 @@
 .card {
-  width: 200px;
+  width: 300px;
+  padding: 15px;
+  border-radius: 20px;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 8px;
 }
 
 .card.pending {
   background-color: var(--info-bg);
+  border-color: var(--info-primary);
 }
 
 .card.rejected {
   background-color: var(--danger-bg);
+  border-color: var(--success-primary);
 }
 
 .card.accepted {
   background-color: var(--success-bg);
+  border-color: var(--success-primary);
 }

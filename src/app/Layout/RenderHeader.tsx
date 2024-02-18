@@ -1,3 +1,4 @@
+import { ArrowBigUpIcon, KeyIcon, UsersIcon } from 'lucide-react'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { postLogoutConfig } from '@/shared/api'
@@ -55,19 +56,22 @@ export const RenderHeader = () => {
           </Typography>
 
           <Link to={routes.keys()}>
-            <Typography tag="span" variant="t1" isLink={true}>
+            <KeyIcon />
+            <Typography tag="span" variant="link" isLink={true}>
               Ключи
             </Typography>
           </Link>
 
           <Link to={routes.users()}>
-            <Typography tag="span" variant="t1" isLink={true}>
+            <UsersIcon />
+            <Typography tag="span" variant="link" isLink={true}>
               Пользователи
             </Typography>
           </Link>
 
           <Link to={routes.requests()}>
-            <Typography tag="span" variant="t1" isLink={true}>
+            <ArrowBigUpIcon />
+            <Typography tag="span" variant="link" isLink={true}>
               Заявки
             </Typography>
           </Link>

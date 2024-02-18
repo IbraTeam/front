@@ -1,3 +1,4 @@
+import { MapPinIcon } from 'lucide-react'
 import { InputBlock, SearchLoader } from '@/shared/components'
 import { validations } from '@/shared/const'
 import { Button, Typography } from '@/shared/uikit'
@@ -36,7 +37,11 @@ export const KeysPage = () => {
       {keysLoading && <SearchLoader />}
       {keys?.map((key) => (
         <div>
-          <Typography variant="t2">{key.room}</Typography>
+          <MapPinIcon />
+          <Typography tag="p" variant="t4">
+            Аудитория: <Typography tag="span">{key.room}</Typography>
+          </Typography>
+
           <Button
             disabled={removeKeyLoading}
             className="btn"

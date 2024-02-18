@@ -84,3 +84,11 @@
   }
 
 }
+
+.link {
+  color: var(--primary-main)
+}
+
+.link:hover {
+  color: var(--primary-hover)
+}

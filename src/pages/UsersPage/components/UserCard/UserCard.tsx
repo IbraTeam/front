@@ -1,3 +1,4 @@
+import { RoleEnum } from '@/shared/const'
 import { Button, Typography } from '@/shared/uikit'
 import styles from './UserCard.module.css'
 
@@ -9,13 +10,19 @@ interface UserCardProps {
 
 export const UserCard = ({ user, onAddRoleClick, onRemoveRoleClick }: UserCardProps) => (
   <div className={styles.wrapper}>
-    <Typography variant="t1">Имя: {user.name}</Typography>
-    <Typography variant="t1">Почта: {user.email}</Typography>
-    <Typography variant="t1">Роль: {user.role}</Typography>
+    <Typography variant="t4">
+      Имя: <Typography tag="span">{user.name}</Typography>
+    </Typography>
+    <Typography variant="t4">
+      Почта: <Typography tag="span">{user.email}</Typography>
+    </Typography>
+    <Typography variant="t4">
+      Роль: <Typography tag="span">{RoleEnum[user.role]}</Typography>
+    </Typography>
 
     <div className={styles.buttons}>
       {user.role === 'DEAN' ||
-        (user.role === 'ADMIN' && <Typography variant="t2">Доступных действий нет</Typography>)}
+        (user.role === 'ADMIN' && <Typography variant="t4">Доступных действий нет</Typography>)}
 
       {user.role !== 'STUDENT' && user.role !== 'DEAN' && user.role !== 'ADMIN' && (
         <Button

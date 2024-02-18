@@ -43,7 +43,7 @@ export const RequestsPage = () => {
 
       <Typography>Выберете день недели (выведутся заявки со всей недели)</Typography>
       <div className={styles.top}>
-        <Button className="btn" disabled={!weekStart} onClick={() => onPreviousWeekClick()}>
+        <Button className="btn" onClick={() => onPreviousWeekClick()}>
           Пред. неделя
         </Button>
 
@@ -54,7 +54,7 @@ export const RequestsPage = () => {
           onChange={(event) => onWeekStartChange(event.currentTarget.value)}
         />
 
-        <Button className="btn" disabled={!weekStart} onClick={() => onNextWeekClick()}>
+        <Button className="btn" onClick={() => onNextWeekClick()}>
           След. неделя
         </Button>
       </div>
