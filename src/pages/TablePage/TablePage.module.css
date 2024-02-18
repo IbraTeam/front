@@ -1,0 +1,10 @@
+.days {
+  margin: 0 auto;
+  display: flex;
+}
+
+.pairs {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}

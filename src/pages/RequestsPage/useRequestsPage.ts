@@ -1,10 +1,9 @@
 import { useSearchParams } from 'react-router-dom'
-import { MultiValue } from 'react-select'
+import { MultiValue, SingleValue } from 'react-select'
 import { getRequestConfig, postRequestRequestIdConfig, requestInstance } from '@/shared/api'
 import { PairNumberOption, StatusOption, TypeBookingOption } from '@/shared/const'
 import {
   convertDateToBackendFormat,
-  convertDateToFrontendFormat,
   getStartOfNextWeek,
   getStartOfPreviousWeek,
   getStartOfWeek,
@@ -18,7 +17,7 @@ export const useRequestsPage = () => {
   const weekStart = searchParams.get('weekStart')
   const pairNumbers = searchParams.getAll('pairNumber')
   const statuses = searchParams.getAll('status')
-  const bookingTypes = searchParams.getAll('type')
+  const bookingType = searchParams.get('type')
 
   const {
     isLoading: requestsLoading,
@@ -27,11 +26,7 @@ export const useRequestsPage = () => {
   } = useRequest<TableDTO>({
     onMount: true,
     config: getRequestConfig(searchParams.toString()),
-    instance: requestInstance,
-    onSuccess: (data) => {
-      searchParams.set('weekStart', convertDateToFrontendFormat(data.weekStart))
-      setSearchParams(searchParams)
-    }
+    instance: requestInstance
   })
 
   const { isLoading: changeRequestLoading, requestHandler: changeRequestHandler } = useRequest<
@@ -43,27 +38,22 @@ export const useRequestsPage = () => {
   })
 
   const invalidateRequests = () => {
-    const params = new URLSearchParams(searchParams.toString())
+    const copySearchParams = new URLSearchParams(searchParams)
+    copySearchParams.set(
+      'weekStart',
+      convertDateToBackendFormat(copySearchParams.get('weekStart') ?? '')
+    )
 
-    for (const [key, value] of params.entries()) {
-      if (key === 'weekStart') {
-        const startOfWeek = convertDateToBackendFormat(value)
-        params.delete(key)
-        params.append(key, startOfWeek)
-      }
-    }
-
-    const updatedQueryString = params.toString()
-    getRequestsHandler(getRequestConfig(updatedQueryString))
+    getRequestsHandler(getRequestConfig(copySearchParams.toString()))
   }
 
   const onAcceptRequestClick = (id: string) => {
-    changeRequestHandler(postRequestRequestIdConfig(id, true))
+    changeRequestHandler(postRequestRequestIdConfig(id, { accept: true }))
     invalidateRequests()
   }
 
   const onRejectRequestClick = (id: string) => {
-    changeRequestHandler(postRequestRequestIdConfig(id, false))
+    changeRequestHandler(postRequestRequestIdConfig(id, { accept: false }))
     invalidateRequests()
   }
 
@@ -100,15 +90,11 @@ export const useRequestsPage = () => {
     invalidateRequests()
   }
 
-  const onTypesChange = (selectedTypes: MultiValue<TypeBookingOption>) => {
-    searchParams.delete('type')
-
-    selectedTypes.forEach((type) => {
-      searchParams.append('type', type.value)
-    })
+  const onBookingTypeChange = (selectedType: SingleValue<TypeBookingOption>) => {
+    if (!selectedType?.value) searchParams.delete('type')
+    else searchParams.set('type', selectedType.value)
 
     setSearchParams(searchParams)
-
     invalidateRequests()
   }
 
@@ -145,9 +131,9 @@ export const useRequestsPage = () => {
     weekStart,
     pairNumbers,
     statuses,
-    bookingTypes,
+    bookingType,
     onStatusesChange,
-    onTypesChange,
+    onBookingTypeChange,
     onWeekStartChange,
     onPairNumbersChange
   }

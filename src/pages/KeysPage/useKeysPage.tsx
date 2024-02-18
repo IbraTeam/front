@@ -10,12 +10,13 @@ export const useKeysPage = () => {
     formState: { errors }
   } = useForm<CreateAudienceKeyDto>()
 
-  const { isLoading: keysLoading, data: keys } = useRequest<KeyDto[]>({
+  const {
+    isLoading: keysLoading,
+    data: keys,
+    requestHandler: getKeysHandler
+  } = useRequest<KeyDto[]>({
     onMount: true,
-    config: getAudienceKeyGetAllConfig(),
-    onSuccess(data) {
-      console.log(data)
-    }
+    config: getAudienceKeyGetAllConfig()
   })
 
   const { isLoading: createKeyLoading, requestHandler: createKeyHandler } = useRequest<
@@ -37,6 +38,7 @@ export const useKeysPage = () => {
 
   const onRemoveKeyClick = async (keyId: string) => {
     await removeKeyHandler(deleteAudienceKeyConfig(keyId))
+    getKeysHandler(getAudienceKeyGetAllConfig())
   }
 
   return {

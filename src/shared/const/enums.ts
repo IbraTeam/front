@@ -31,7 +31,7 @@ export const typeBookingOptions: TypeBookingOption[] = [
 
 export interface TypeBookingOption {
   label: TypeBookingEnum
-  value: string
+  value: string | null
 }
 
 export enum StatusEnum {
@@ -94,3 +94,13 @@ export const PairNumberTime = {
   Ninth: '22:40-00:15',
   Ten: '00:25-01:00'
 } as const
+
+export const DayNumber: Record<number, string> = {
+  0: 'Понедельник',
+  1: 'Вторник',
+  2: 'Среда',
+  3: 'Четверг',
+  4: 'Пятница',
+  5: 'Суббота',
+  6: 'Воскресенье'
+}

@@ -112,7 +112,9 @@ declare global {
     weekEnd: string
   }
 
-  type AcceptOrCancelRequestDTO = boolean
+  interface AcceptOrCancelRequestDTO {
+    accept: boolean
+  }
 
   interface CreatePair {
     dateTime: string

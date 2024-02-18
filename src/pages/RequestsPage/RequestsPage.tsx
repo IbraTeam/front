@@ -9,9 +9,9 @@ import {
   StatusOption,
   statusOptions,
   TypeBookingEnum,
-  TypeBookingOption,
   typeBookingOptions
 } from '@/shared/const'
+import { convertDateToFrontendFormat } from '@/shared/lib/helpers'
 import { Button, Typography } from '@/shared/uikit'
 import { RequestCard } from './components/RequestCard/RequestCard'
 import { useRequestsPage } from './useRequestsPage'
@@ -24,10 +24,10 @@ export const RequestsPage = () => {
     onNextWeekClick,
     weekStart,
     onStatusesChange,
-    onTypesChange,
+    onBookingTypeChange,
     onWeekStartChange,
     onPairNumbersChange,
-    bookingTypes,
+    bookingType,
     pairNumbers,
     statuses,
     requests,
@@ -50,7 +50,7 @@ export const RequestsPage = () => {
         <InputBlock
           wrapperClassName={styles.inputWrapper}
           type="date"
-          value={weekStart ?? ''}
+          value={weekStart ?? convertDateToFrontendFormat(requests?.weekStart)}
           onChange={(event) => onWeekStartChange(event.currentTarget.value)}
         />
 
@@ -64,13 +64,11 @@ export const RequestsPage = () => {
         options={typeBookingOptions}
         placeholder="Выберете тип заявки"
         isSearchable={false}
-        isMulti
-        value={bookingTypes.map((category: string) => ({
-          label: TypeBookingEnum[category as TypeBooking] || '',
-          value: category
-        }))}
-        onChange={onTypesChange}
-        styles={selectStyles<TypeBookingOption, true>()}
+        value={{
+          label: TypeBookingEnum[bookingType as TypeBooking] || '',
+          value: bookingType
+        }}
+        onChange={onBookingTypeChange}
       />
 
       <Select

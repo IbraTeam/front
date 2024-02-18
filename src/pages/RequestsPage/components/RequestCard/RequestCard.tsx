@@ -38,22 +38,25 @@ export const RequestCard = ({
       <Typography tag="p" variant="t4">
         Название: <Typography tag="span">{request.pairName}</Typography>
       </Typography>
+
       <Typography tag="p" variant="t4">
         Тип заявки: <Typography tag="span">{TypeBookingEnum[request.typeBooking]}</Typography>
       </Typography>
 
       <Typography tag="p" variant="t4">
-        Заказчик: <Typography tag="span">{request.user.name}</Typography>
+        Аудитория: <Typography tag="span">{request.name}</Typography>
       </Typography>
-    </div>
 
-    <div>
       <Typography tag="p" variant="t4">
         Дата: <Typography tag="span">{getDateFromDateTime(request.dateTime)}</Typography>
       </Typography>
 
       <Typography tag="p" variant="t4">
         Время: <Typography tag="span">{PairNumberTime[request.pairNumber]}</Typography>
+      </Typography>
+
+      <Typography tag="p" variant="t4">
+        Заказчик: <Typography tag="span">{request.user.name}</Typography>
       </Typography>
     </div>
 

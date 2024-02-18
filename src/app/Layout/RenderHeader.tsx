@@ -55,21 +55,21 @@ export const RenderHeader = () => {
           </Typography>
 
           <Link to={routes.keys()}>
-            <KeyIcon />
+            <KeyIcon color="var(--primary-main)" />
             <Typography tag="span" variant="link" isLink={true}>
               Ключи
             </Typography>
           </Link>
 
           <Link to={routes.users()}>
-            <UsersIcon />
+            <UsersIcon color="var(--primary-main)" />
             <Typography tag="span" variant="link" isLink={true}>
               Пользователи
             </Typography>
           </Link>
 
           <Link to={routes.requests()}>
-            <ArrowBigUpIcon />
+            <ArrowBigUpIcon color="var(--primary-main)" />
             <Typography tag="span" variant="link" isLink={true}>
               Заявки
             </Typography>
@@ -85,7 +85,6 @@ export const RenderHeader = () => {
       )}
       renderUserActions={() => (
         <>
-          {/* <ToggleTheme /> */}
           {isAuth && (
             <Button styleType="outlined" alertType="primary" onClick={() => navigate(routes.profile())}>
               <Typography tag="span" className="ellipsis" variant="empty">

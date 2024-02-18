@@ -1,0 +1,15 @@
+.cell {
+  width: 200px;
+  height: 200px;
+  background-color: var(--primary-focus);
+  border: 1px solid var(--primary-main);
+
+  padding: 15px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1 1 auto;
+}
