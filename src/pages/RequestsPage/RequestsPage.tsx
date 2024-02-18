@@ -12,7 +12,6 @@ import {
   TypeBookingOption,
   typeBookingOptions
 } from '@/shared/const'
-import { getCurrentWeekStart } from '@/shared/lib/helpers'
 import { Button, Typography } from '@/shared/uikit'
 import { RequestCard } from './components/RequestCard/RequestCard'
 import { useRequestsPage } from './useRequestsPage'
@@ -51,7 +50,7 @@ export const RequestsPage = () => {
         <InputBlock
           wrapperClassName={styles.inputWrapper}
           type="date"
-          value={weekStart ?? getCurrentWeekStart()}
+          value={weekStart ?? ''}
           onChange={(event) => onWeekStartChange(event.currentTarget.value)}
         />
 

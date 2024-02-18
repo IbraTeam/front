@@ -108,9 +108,11 @@ declare global {
 
   interface TableDTO {
     requests: RequestDTO[]
-    WeekStart: Date
-    WeekEnd: Date
+    weekStart: string
+    weekEnd: string
   }
+
+  type AcceptOrCancelRequestDTO = boolean
 
   interface CreatePair {
     dateTime: string

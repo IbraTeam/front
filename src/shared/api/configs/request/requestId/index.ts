@@ -1,7 +1,7 @@
 import { config } from '../../../config'
 
-export const postRequestRequestIdConfig = (requestId: string, accept: boolean) =>
-  config<never>({
-    config: { method: 'post' },
-    url: `/request/${requestId}?accept=${JSON.stringify(accept)}`
+export const postRequestRequestIdConfig = (requestId: string, dto: AcceptOrCancelRequestDTO) =>
+  config<AcceptOrCancelRequestDTO>({
+    config: { method: 'post', data: dto },
+    url: `/request/${requestId}`
   })

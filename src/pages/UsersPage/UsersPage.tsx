@@ -54,7 +54,9 @@ export const UsersPage = () => {
           />
         ))}
       </div>
-      {!!users && <Pagination pagination={users.page} onPageChange={onPageChange} />}
+      {!!users && users.page.totalPages > 1 && (
+        <Pagination pagination={users.page} onPageChange={onPageChange} />
+      )}
     </div>
   )
 }

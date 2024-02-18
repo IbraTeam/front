@@ -4,6 +4,7 @@ import { getRequestConfig, postRequestRequestIdConfig, requestInstance } from '@
 import { PairNumberOption, StatusOption, TypeBookingOption } from '@/shared/const'
 import {
   convertDateToBackendFormat,
+  convertDateToFrontendFormat,
   getStartOfNextWeek,
   getStartOfPreviousWeek,
   getStartOfWeek,
@@ -26,10 +27,17 @@ export const useRequestsPage = () => {
   } = useRequest<TableDTO>({
     onMount: true,
     config: getRequestConfig(searchParams.toString()),
-    instance: requestInstance
+    instance: requestInstance,
+    onSuccess: (data) => {
+      searchParams.set('weekStart', convertDateToFrontendFormat(data.weekStart))
+      setSearchParams(searchParams)
+    }
   })
 
-  const { isLoading: changeRequestLoading, requestHandler: changeRequestHandler } = useRequest({
+  const { isLoading: changeRequestLoading, requestHandler: changeRequestHandler } = useRequest<
+    never,
+    AcceptOrCancelRequestDTO
+  >({
     onSuccess: () => toastOnSuccessRequest('Операция по заявке совершена успешно'),
     instance: requestInstance
   })

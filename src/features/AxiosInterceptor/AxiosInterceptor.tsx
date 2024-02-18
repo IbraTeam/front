@@ -1,13 +1,12 @@
 import { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { apiInstance } from '@/shared/api'
-import { routes, USER_INFO_KEY } from '@/shared/const'
+import { useNavigate } from 'react-router-dom'
+import { apiInstance, requestInstance } from '@/shared/api'
+import { USER_INFO_KEY } from '@/shared/const'
 import { useUserContext, useUserSwitcherContext } from '@/shared/lib/contexts'
 
 export const AxiosInterceptor = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate()
-  const location = useLocation()
   const [isSet, setIsSet] = React.useState(false)
 
   const { isAuth } = useUserContext()
@@ -20,13 +19,17 @@ export const AxiosInterceptor = ({ children }: { children: React.ReactNode }) =>
     const errorResponseInterceptor = <T, D>(error: AxiosError<T, D>) => {
       if (error?.response?.status === 401 && isAuth) {
         logout()
-        navigate(routes.login(), { state: { from: location }, replace: true })
       }
 
       return Promise.reject(error)
     }
 
     const responseInterceptors = apiInstance.interceptors.response.use(
+      successResponseInterceptor,
+      errorResponseInterceptor
+    )
+
+    const requestResponseInterceptors = requestInstance.interceptors.response.use(
       successResponseInterceptor,
       errorResponseInterceptor
     )
@@ -46,9 +49,17 @@ export const AxiosInterceptor = ({ children }: { children: React.ReactNode }) =>
       errorRequestInterceptor
     )
 
+    const requestRequestInterceptors = requestInstance.interceptors.request.use(
+      successRequestInterceptor,
+      errorRequestInterceptor
+    )
+
     return () => {
       apiInstance.interceptors.response.eject(responseInterceptors)
-      apiInstance.interceptors.response.eject(requestInterceptors)
+      apiInstance.interceptors.request.eject(requestInterceptors)
+
+      requestInstance.interceptors.response.eject(requestResponseInterceptors)
+      requestInstance.interceptors.request.eject(requestRequestInterceptors)
     }
   }, [navigate])
 

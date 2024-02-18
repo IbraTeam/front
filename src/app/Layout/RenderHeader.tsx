@@ -18,7 +18,6 @@ export const RenderHeader = () => {
   const { requestHandler: logoutRequest } = useRequest<never>({
     onSuccess: () => {
       logout()
-      navigate(routes.root())
     },
     onError: () => {
       toastOnErrorRequest('Ошибка выхода')

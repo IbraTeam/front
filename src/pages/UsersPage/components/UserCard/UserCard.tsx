@@ -21,8 +21,9 @@ export const UserCard = ({ user, onAddRoleClick, onRemoveRoleClick }: UserCardPr
     </Typography>
 
     <div className={styles.buttons}>
-      {user.role === 'DEAN' ||
-        (user.role === 'ADMIN' && <Typography variant="t4">Доступных действий нет</Typography>)}
+      {(user.role === 'DEAN' || user.role === 'ADMIN') && (
+        <Typography variant="t4">Доступных действий нет</Typography>
+      )}
 
       {user.role !== 'STUDENT' && user.role !== 'DEAN' && user.role !== 'ADMIN' && (
         <Button
