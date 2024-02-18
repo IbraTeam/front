@@ -1,0 +1,15 @@
+.card {
+  width: 200px;
+}
+
+.card.pending {
+  background-color: var(--info-bg);
+}
+
+.card.rejected {
+  background-color: var(--danger-bg);
+}
+
+.card.accepted {
+  background-color: var(--success-bg);
+}

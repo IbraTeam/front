@@ -1,0 +1,24 @@
+.cards {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.select {
+  margin: 20px 0;
+  width: 300px;
+}
+
+.inputWrapper {
+  width: 200px;
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}

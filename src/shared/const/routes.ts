@@ -4,5 +4,6 @@ export const routes = {
   register: () => '/register',
   profile: () => '/profile',
   keys: () => '/keys',
-  users: () => '/users'
+  users: () => '/users',
+  requests: () => '/requests'
 }

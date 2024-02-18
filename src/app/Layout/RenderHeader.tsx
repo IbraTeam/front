@@ -66,7 +66,11 @@ export const RenderHeader = () => {
             </Typography>
           </Link>
 
-          {isAuth && <div>чтото для авторизованного</div>}
+          <Link to={routes.requests()}>
+            <Typography tag="span" variant="t1" isLink={true}>
+              Заявки
+            </Typography>
+          </Link>
         </>
       )}
       renderUserActions={() => (

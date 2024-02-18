@@ -54,12 +54,8 @@ export const useUsersPage = () => {
   }, NAME_FILTER_DURATION)
 
   const onRolesChange = (selectedRoles: MultiValue<RoleOption>) => {
-    if (!selectedRoles) {
-      searchParams.delete('roles')
-      return
-    }
-
     searchParams.delete('roles')
+
     selectedRoles.forEach((role) => {
       searchParams.append('roles', role.value)
     })

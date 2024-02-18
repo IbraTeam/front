@@ -4,17 +4,19 @@ declare global {
   type Role = 'TEACHER' | 'STUDENT' | 'DEAN' | 'ADMIN' | 'USER'
   type KeyStatus = 'IN_DEAN' | 'ON_HANDS' | 'TRANSFERRING' | 'OFFERING_TO_YOU'
   type Status = 'Accepted' | 'Rejected' | 'Pending'
-  type PairNumber =
-    | 'First'
-    | 'Second'
-    | 'Third'
-    | 'Fourth'
-    | 'Fifth'
-    | 'Sixth'
-    | 'Seventh'
-    | 'Eighth'
-    | 'Ninth'
-    | 'Ten'
+  // type PairNumber =
+  //   | 'First'
+  //   | 'Second'
+  //   | 'Third'
+  //   | 'Fourth'
+  //   | 'Fifth'
+  //   | 'Sixth'
+  //   | 'Seventh'
+  //   | 'Eighth'
+  //   | 'Ninth'
+  //   | 'Ten'
+
+  type PairNumber = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
 
   interface BaseResponse {
     message: string
@@ -88,5 +90,29 @@ declare global {
   interface UsersResponse {
     users: UserDto[]
     page: PageResponse
+  }
+
+  interface RequestDTO {
+    id: string
+    name: string
+    pairName: string
+    status: Status
+    dateTime: Date
+    dayNumb: number
+    typeBooking: TypeBooking
+    pairNumber: number
+    keyId: string
+    user: {
+      id: string
+      name: string
+      email: string
+      role: Role
+    }
+  }
+
+  interface TableDTO {
+    requests: RequestDTO[]
+    WeekStart: Date
+    WeekEnd: Date
   }
 }
