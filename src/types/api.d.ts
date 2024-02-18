@@ -4,19 +4,17 @@ declare global {
   type Role = 'TEACHER' | 'STUDENT' | 'DEAN' | 'ADMIN' | 'USER'
   type KeyStatus = 'IN_DEAN' | 'ON_HANDS' | 'TRANSFERRING' | 'OFFERING_TO_YOU'
   type Status = 'Accepted' | 'Rejected' | 'Pending'
-  // type PairNumber =
-  //   | 'First'
-  //   | 'Second'
-  //   | 'Third'
-  //   | 'Fourth'
-  //   | 'Fifth'
-  //   | 'Sixth'
-  //   | 'Seventh'
-  //   | 'Eighth'
-  //   | 'Ninth'
-  //   | 'Ten'
-
-  type PairNumber = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+  type PairNumber =
+    | 'First'
+    | 'Second'
+    | 'Third'
+    | 'Fourth'
+    | 'Fifth'
+    | 'Sixth'
+    | 'Seventh'
+    | 'Eighth'
+    | 'Ninth'
+    | 'Ten'
 
   interface BaseResponse {
     message: string
@@ -66,12 +64,10 @@ declare global {
   }
 
   interface KeyDto {
-    keyId: string
-    room: string
-    dateTime: string
-    pairNumber: string
-    transferStatus: KeyStatus
     userName: string
+    room: string
+    id: string
+    transferStatus: KeyStatus
   }
 
   interface RoleRequest {
@@ -97,10 +93,10 @@ declare global {
     name: string
     pairName: string
     status: Status
-    dateTime: Date
+    dateTime: string
     dayNumb: number
     typeBooking: TypeBooking
-    pairNumber: number
+    pairNumber: PairNumber
     keyId: string
     user: {
       id: string

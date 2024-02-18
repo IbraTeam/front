@@ -52,32 +52,45 @@ export interface StatusOption {
 }
 
 export enum PairNumberEnum {
-  Zero = '1',
-  One = '2',
-  Two = '3',
-  Three = '4',
-  Four = '5',
-  Five = '6',
-  Six = '7',
-  Seven = '8',
-  Eight = '9',
-  Nine = '10'
+  First = 'Первая',
+  Second = 'Вторая',
+  Third = 'Третья',
+  Fourth = 'Четвертая',
+  Fifth = 'Пятая',
+  Sixth = 'Шестая',
+  Seventh = 'Седьмая',
+  Eighth = 'Восьмая',
+  Ninth = 'Девятая',
+  Ten = 'Десятая'
 }
 
 export const pairNumberOptions: PairNumberOption[] = [
-  { label: PairNumberEnum.Zero, value: '1' },
-  { label: PairNumberEnum.One, value: '2' },
-  { label: PairNumberEnum.Two, value: '3' },
-  { label: PairNumberEnum.Three, value: '4' },
-  { label: PairNumberEnum.Four, value: '5' },
-  { label: PairNumberEnum.Five, value: '6' },
-  { label: PairNumberEnum.Six, value: '7' },
-  { label: PairNumberEnum.Seven, value: '8' },
-  { label: PairNumberEnum.Eight, value: '9' },
-  { label: PairNumberEnum.Nine, value: '10' }
+  { label: PairNumberEnum.First, value: 'First' },
+  { label: PairNumberEnum.Second, value: 'Second' },
+  { label: PairNumberEnum.Third, value: 'Third' },
+  { label: PairNumberEnum.Fourth, value: 'Fourth' },
+  { label: PairNumberEnum.Fifth, value: 'Fifth' },
+  { label: PairNumberEnum.Sixth, value: 'Sixth' },
+  { label: PairNumberEnum.Seventh, value: 'Seventh' },
+  { label: PairNumberEnum.Eighth, value: 'Eighth' },
+  { label: PairNumberEnum.Ninth, value: 'Ninth' },
+  { label: PairNumberEnum.Ten, value: 'Ten' }
 ]
 
 export interface PairNumberOption {
-  label: string
+  label: PairNumberEnum
   value: string
 }
+
+export const PairNumberTime = {
+  First: '8:45-10:20',
+  Second: '10:30-12:05',
+  Third: '12:15-13:50',
+  Fourth: '14:00-15:35',
+  Fifth: '15:45-17:20',
+  Sixth: '17:30-19:05',
+  Seventh: '19:15-20:50',
+  Eighth: '20:55-22:30',
+  Ninth: '22:40-00:15',
+  Ten: '00:25-01:00'
+} as const

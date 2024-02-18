@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { deleteAudienceKeyConfig, getAudienceKeyConfig, postAudienceKeyConfig } from '@/shared/api'
+import { deleteAudienceKeyConfig, getAudienceKeyGetAllConfig, postAudienceKeyConfig } from '@/shared/api'
 import { toastOnErrorRequest, toastOnSuccessRequest } from '@/shared/lib/helpers'
 import { useRequest } from '@/shared/lib/hooks'
 
@@ -12,7 +12,10 @@ export const useKeysPage = () => {
 
   const { isLoading: keysLoading, data: keys } = useRequest<KeyDto[]>({
     onMount: true,
-    config: getAudienceKeyConfig()
+    config: getAudienceKeyGetAllConfig(),
+    onSuccess(data) {
+      console.log(data)
+    }
   })
 
   const { isLoading: createKeyLoading, requestHandler: createKeyHandler } = useRequest<

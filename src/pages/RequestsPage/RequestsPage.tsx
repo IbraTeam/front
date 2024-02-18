@@ -1,6 +1,7 @@
 import Select from 'react-select'
 import { InputBlock, SearchLoader } from '@/shared/components'
 import {
+  PairNumberEnum,
   PairNumberOption,
   pairNumberOptions,
   selectStyles,
@@ -94,7 +95,7 @@ export const RequestsPage = () => {
         isSearchable={true}
         isMulti
         value={pairNumbers.map((pairNumber: string) => ({
-          label: pairNumber,
+          label: PairNumberEnum[pairNumber as PairNumber] || '',
           value: pairNumber
         }))}
         onChange={onPairNumbersChange}

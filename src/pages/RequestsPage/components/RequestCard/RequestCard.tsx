@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind'
 import { CheckCircleIcon, CircleEllipsisIcon, XCircleIcon } from 'lucide-react'
-import { StatusEnum, TypeBookingEnum } from '@/shared/const'
+import { PairNumberTime, StatusEnum, TypeBookingEnum } from '@/shared/const'
+import { getDateFromDateTime } from '@/shared/lib/helpers'
 import { Button, Typography } from '@/shared/uikit'
 import styles from './RequestCard.module.css'
 
@@ -43,6 +44,16 @@ export const RequestCard = ({
 
       <Typography tag="p" variant="t4">
         Заказчик: <Typography tag="span">{request.user.name}</Typography>
+      </Typography>
+    </div>
+
+    <div>
+      <Typography tag="p" variant="t4">
+        Дата: <Typography tag="span">{getDateFromDateTime(request.dateTime)}</Typography>
+      </Typography>
+
+      <Typography tag="p" variant="t4">
+        Время: <Typography tag="span">{PairNumberTime[request.pairNumber]}</Typography>
       </Typography>
     </div>
 

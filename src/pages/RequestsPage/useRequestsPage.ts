@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 import { MultiValue } from 'react-select'
-import { getRequestConfig, postRequestRequestIdConfig } from '@/shared/api'
+import { getRequestConfig, postRequestRequestIdConfig, requestInstance } from '@/shared/api'
 import { PairNumberOption, StatusOption, TypeBookingOption } from '@/shared/const'
 import {
   convertDateToBackendFormat,
@@ -25,23 +25,19 @@ export const useRequestsPage = () => {
     requestHandler: getRequestsHandler
   } = useRequest<TableDTO>({
     onMount: true,
-    config: getRequestConfig(searchParams.toString())
+    config: getRequestConfig(searchParams.toString()),
+    instance: requestInstance
   })
 
   const { isLoading: changeRequestLoading, requestHandler: changeRequestHandler } = useRequest({
-    onSuccess: () => toastOnSuccessRequest('Операция по заявке совершена успешно')
+    onSuccess: () => toastOnSuccessRequest('Операция по заявке совершена успешно'),
+    instance: requestInstance
   })
 
   const invalidateRequests = () => {
     const params = new URLSearchParams(searchParams.toString())
 
     for (const [key, value] of params.entries()) {
-      if (key === 'pairNumber') {
-        const newValue = parseInt(value) + 1
-        params.delete(key)
-        params.append(key, newValue.toString())
-      }
-
       if (key === 'weekStart') {
         const startOfWeek = convertDateToBackendFormat(value)
         params.delete(key)

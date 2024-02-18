@@ -42,12 +42,22 @@ export const KeysPage = () => {
             Аудитория: <Typography tag="span">{key.room}</Typography>
           </Typography>
 
+          {key.userName && (
+            <Typography tag="p" variant="t4">
+              Владелец: <Typography tag="span">{key.userName}</Typography>
+            </Typography>
+          )}
+
+          <Typography tag="p" variant="t4">
+            Владелец: <Typography tag="span">{key.transferStatus}</Typography>
+          </Typography>
+
           <Button
             disabled={removeKeyLoading}
             className="btn"
             styleType="solid"
             alertType="danger"
-            onClick={() => onRemoveKeyClick(key.keyId)}
+            onClick={() => onRemoveKeyClick(key.id)}
           >
             Удалить ключ
           </Button>
