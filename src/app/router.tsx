@@ -1,4 +1,12 @@
-import { KeysPage, LoginPage, ProfilePage, RegisterPage, RequestsPage, UsersPage } from '@/pages'
+import {
+  KeysPage,
+  LoginPage,
+  ProfilePage,
+  RegisterPage,
+  RequestsPage,
+  TablePage,
+  UsersPage
+} from '@/pages'
 import { createBrowserRouter, Outlet } from 'react-router-dom'
 import { routes } from '@/shared/const'
 import { Layout } from './Layout/Layout'
@@ -34,6 +42,10 @@ export const router = createBrowserRouter([
           {
             path: routes.requests(),
             element: <RequestsPage />
+          },
+          {
+            path: routes.table(),
+            element: <TablePage />
           }
         ]
       },

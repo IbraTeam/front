@@ -5,5 +5,6 @@ export const routes = {
   profile: () => '/profile',
   keys: () => '/keys',
   users: () => '/users',
-  requests: () => '/requests'
+  requests: () => '/requests',
+  table: () => '/table'
 }

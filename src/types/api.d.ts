@@ -111,4 +111,13 @@ declare global {
     WeekStart: Date
     WeekEnd: Date
   }
+
+  interface CreatePair {
+    dateTime: string
+    repeatCount: number
+    pairNumber: PairNumber
+    teacherId: string
+    keyId: string
+    pairName: string
+  }
 }

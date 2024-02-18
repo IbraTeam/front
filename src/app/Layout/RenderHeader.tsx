@@ -1,4 +1,4 @@
-import { ArrowBigUpIcon, KeyIcon, UsersIcon } from 'lucide-react'
+import { ArrowBigUpIcon, CalendarCheckIcon, KeyIcon, UsersIcon } from 'lucide-react'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { postLogoutConfig } from '@/shared/api'
@@ -73,6 +73,13 @@ export const RenderHeader = () => {
             <ArrowBigUpIcon />
             <Typography tag="span" variant="link" isLink={true}>
               Заявки
+            </Typography>
+          </Link>
+
+          <Link to={routes.table()}>
+            <CalendarCheckIcon color="var(--primary-main)" />
+            <Typography tag="span" variant="link" isLink={true}>
+              Расписание
             </Typography>
           </Link>
         </>
