@@ -9,31 +9,31 @@ export const getAccountUsersConfig: RestRequestConfig = {
         users: [
           {
             id: '1',
-            name: 'Name',
+            name: 'Дима',
             role: 'STUDENT',
             email: 'a@a.ru'
           },
           {
             id: '2',
-            name: 'Name',
+            name: 'Саша',
             role: 'STUDENT',
             email: 'a@a.ru'
           },
           {
             id: '3',
-            name: 'Name',
+            name: 'Игорь',
             role: 'USER',
             email: 'a@a.ru'
           },
           {
             id: '4',
-            name: 'Name',
+            name: 'Петя',
             role: 'ADMIN',
             email: 'a@a.ru'
           },
           {
             id: '5',
-            name: 'Name',
+            name: 'Даша',
             role: 'TEACHER',
             email: 'a@a.ru'
           }
@@ -66,7 +66,7 @@ export const getAccountUsersConfig: RestRequestConfig = {
       }
     },
     {
-      entities: { query: { name: 'AAA' } },
+      entities: { query: { name: 'ААА', size: '40', roles: 'TEACHER' } },
       data: {
         users: [
           {

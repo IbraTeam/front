@@ -29,9 +29,13 @@ export const TableCell = ({ onBookSubmit, request, pairNumber, date }: TableCell
             <Button alertType="primary" styleType="solid" onClick={() => setOpenModal(true)}>
               Забронировать
             </Button>
-            <Modal open={openModal} onClose={() => setOpenModal(false)}>
+            <Modal
+              open={openModal}
+              onClose={() => setOpenModal(false)}
+              classNames={{ modal: styles.modal }}
+            >
               <div>
-                <BookTableCellForm />
+                <BookTableCellForm dateTime={date} pairNumber={pairNumber} />
               </div>
             </Modal>
           </>

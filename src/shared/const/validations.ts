@@ -8,9 +8,17 @@ interface Validation {
 }
 
 export const validations: InputValidations = {
-  room: {
+  keyId: { required: { value: true, message: 'Заполните поле' } },
+  teacherId: { required: { value: true, message: 'Заполните поле' } },
+  pairName: {
+    required: { value: true, message: 'Заполните поле' }
+  },
+  repeatCount: {
     required: { value: true, message: 'Заполните поле' },
-    pattern: { value: /\d/, message: 'Номер должен быть положительным' }
+    pattern: { value: /\d*/, message: 'Номер должен быть положительным' }
+  },
+  room: {
+    required: { value: true, message: 'Заполните поле' }
   },
   name: {
     required: { value: true, message: 'Заполните поле' },

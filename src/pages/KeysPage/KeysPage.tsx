@@ -23,7 +23,6 @@ export const KeysPage = () => {
         <InputBlock
           wrapperClassName={styles.inputWrapper}
           label="Номер ключа"
-          type="number"
           error={errors.room?.message}
           {...register('room', validations.room)}
           ref={register('room', validations.room).ref}
