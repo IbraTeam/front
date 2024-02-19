@@ -6,7 +6,7 @@ import {
   getUsersConfig,
   postRequestCreatePairConfig
 } from '@/shared/api'
-import { toastOnErrorRequest } from '@/shared/lib/helpers'
+import { toastOnErrorRequest, toastOnSuccessRequest } from '@/shared/lib/helpers'
 import { useRequest } from '@/shared/lib/hooks'
 import { getKeysOptions } from './helpers/getKeysOptions'
 import { getTeachersOptions } from './helpers/getTeachersOptions'
@@ -30,7 +30,10 @@ export const useBookTableCellForm = ({ dateTime, pairNumber }: UseBookTableCellF
   const { isLoading: createPairLoading, requestHandler: createPairHandler } = useRequest<
     BaseResponse,
     CreatePair
-  >({ onSuccess: () => {}, onError: (error) => toastOnErrorRequest(error ?? 'Ошибка создания пары') })
+  >({
+    onSuccess: () => toastOnSuccessRequest('Пара успешно создана'),
+    onError: (error) => toastOnErrorRequest(error ?? 'Ошибка создания пары')
+  })
 
   const { isLoading: keysLoading, data: keys } = useRequest<KeyDto[]>({
     onMount: true,
@@ -48,7 +51,6 @@ export const useBookTableCellForm = ({ dateTime, pairNumber }: UseBookTableCellF
   }
 
   const onSubmit = handleSubmit(async (value) => {
-    console.log(value)
     createPairHandler(postRequestCreatePairConfig({ ...value, pairNumber, dateTime }))
   })
 

@@ -1,3 +1,10 @@
+export enum KeyStatusEnum {
+  IN_DEAN = 'В деканате',
+  ON_HANDS = 'На руках',
+  TRANSFERRING = 'Передается',
+  OFFERING_TO_YOU = 'Передается вам'
+}
+
 export enum RoleEnum {
   ADMIN = 'Админ',
   USER = 'Пользователь',

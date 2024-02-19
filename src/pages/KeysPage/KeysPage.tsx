@@ -1,6 +1,6 @@
 import { MapPinIcon } from 'lucide-react'
 import { InputBlock, SearchLoader } from '@/shared/components'
-import { validations } from '@/shared/const'
+import { KeyStatusEnum, validations } from '@/shared/const'
 import { Button, Typography } from '@/shared/uikit'
 import { useKeysPage } from './useKeysPage'
 import styles from './KeysPage.module.css'
@@ -48,7 +48,7 @@ export const KeysPage = () => {
           )}
 
           <Typography tag="p" variant="t4">
-            Владелец: <Typography tag="span">{key.transferStatus}</Typography>
+            Статус: <Typography tag="span">{KeyStatusEnum[key.transferStatus]}</Typography>
           </Typography>
 
           <Button

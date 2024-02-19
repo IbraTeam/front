@@ -7,12 +7,12 @@ import styles from './TableCell.module.css'
 
 export interface TableCellProps {
   request?: RequestDTO
-  onBookSubmit: () => void
+  onBookSubmit?: () => void
   pairNumber: PairNumber
   date: string
 }
 
-export const TableCell = ({ onBookSubmit, request, pairNumber, date }: TableCellProps) => {
+export const TableCell = ({ request, pairNumber, date }: TableCellProps) => {
   const [openModal, setOpenModal] = React.useState(false)
 
   return (

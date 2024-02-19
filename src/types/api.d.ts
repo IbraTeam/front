@@ -23,6 +23,7 @@ declare global {
 
   interface TokenResponse {
     token: string
+    role: Role
   }
 
   interface FormErrorResponse<T> {

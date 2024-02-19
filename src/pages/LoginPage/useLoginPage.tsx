@@ -23,7 +23,7 @@ export const useLoginPage = () => {
 
   const { isLoading, requestHandler } = useRequest<TokenResponse, LoginCredentials>({
     onSuccess: async (tokenResponse) => {
-      login({ email: watch('email'), token: tokenResponse.token, role: 'DEAN' })
+      login({ email: watch('email'), ...tokenResponse })
     },
     onError: (error) => {
       toastOnErrorRequest(error || 'Ошибка входа в аккаунт')
