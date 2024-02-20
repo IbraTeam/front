@@ -9,7 +9,7 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     user: { role }
   } = useUserContext()
 
-  return isAuth && role === 'DEAN' ? (
+  return isAuth && (role === 'DEAN' || role === 'ADMIN') ? (
     children
   ) : (
     <Navigate to={routes.login()} replace state={{ from: location }} />

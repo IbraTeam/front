@@ -3,6 +3,10 @@
   display: flex;
 }
 
+.day {
+  text-align: center;
+}
+
 .pairs {
   margin-top: 20px;
   display: flex;

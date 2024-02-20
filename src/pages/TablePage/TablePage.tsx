@@ -17,7 +17,12 @@ export const TablePage = () => {
         </Button>
         {table.map((day, dayIndex) => (
           <div>
-            <Typography tag="h2" variant="t6">
+            {!!day.length && (
+              <Typography tag="h2" variant="t4" className={styles.day}>
+                {day[0].date}
+              </Typography>
+            )}
+            <Typography tag="h2" variant="t6" className={styles.day}>
               {DayNumber[dayIndex]}
             </Typography>
             <div className={styles.pairs}>

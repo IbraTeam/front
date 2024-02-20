@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 import { MultiValue, SingleValue } from 'react-select'
-import { getRequestConfig, postRequestRequestIdConfig, requestInstance } from '@/shared/api'
+import { getRequestConfig, postRequestRequestIdConfig } from '@/shared/api'
 import { PairNumberOption, StatusOption, TypeBookingOption } from '@/shared/const'
 import {
   convertDateToBackendFormat,
@@ -26,7 +26,7 @@ export const useRequestsPage = () => {
   } = useRequest<TableDTO>({
     onMount: true,
     config: getRequestConfig(searchParams.toString()),
-    instance: requestInstance
+    instance: 'request'
   })
 
   const { isLoading: changeRequestLoading, requestHandler: changeRequestHandler } = useRequest<
@@ -34,7 +34,7 @@ export const useRequestsPage = () => {
     AcceptOrCancelRequestDTO
   >({
     onSuccess: () => toastOnSuccessRequest('Операция по заявке совершена успешно'),
-    instance: requestInstance
+    instance: 'request'
   })
 
   const invalidateRequests = () => {
@@ -99,9 +99,11 @@ export const useRequestsPage = () => {
   }
 
   const onNextWeekClick = () => {
-    if (!weekStart) return
+    const currentWeekStart = weekStart || requests?.weekStart
 
-    const startOfNextWeek = getStartOfNextWeek(weekStart)
+    if (!currentWeekStart) return
+
+    const startOfNextWeek = getStartOfNextWeek(currentWeekStart)
 
     searchParams.set('weekStart', startOfNextWeek)
     setSearchParams(searchParams)
@@ -110,9 +112,11 @@ export const useRequestsPage = () => {
   }
 
   const onPreviousWeekClick = () => {
-    if (!weekStart) return
+    const currentWeekStart = weekStart || requests?.weekStart
 
-    const startOfPreviousWeek = getStartOfPreviousWeek(weekStart)
+    if (!currentWeekStart) return
+
+    const startOfPreviousWeek = getStartOfPreviousWeek(currentWeekStart)
 
     searchParams.set('weekStart', startOfPreviousWeek)
     setSearchParams(searchParams)

@@ -1,9 +1,5 @@
 import { add, format } from 'date-fns'
-import {
-  convertDateToBackendFormat,
-  getDateFromDateTime,
-  getFrontendDateFromDateTime
-} from '@/shared/lib/helpers'
+import { getFrontendDateFromDateTime } from '@/shared/lib/helpers'
 
 const pairs: PairNumber[] = [
   'First',
@@ -24,12 +20,11 @@ export const getTable = (tableResponse: TableDTO) => {
 
   return days.map((day, dayIndex) =>
     day.map((pair) => {
-      const currentDay = convertDateToBackendFormat(
-        format(add(weekStartDate, { days: dayIndex }), 'yyyy-MM-dd')
-      )
+      const currentDay = format(add(weekStartDate, { days: dayIndex }), 'yyyy-MM-dd')
 
       const request = tableResponse.requests.find(
-        (request) => getDateFromDateTime(request.dateTime) === currentDay && request.pairNumber === pair
+        (request) =>
+          getFrontendDateFromDateTime(request.dateTime) === currentDay && request.pairNumber === pair
       )
 
       return { date: currentDay, pairNumber: pair, request }

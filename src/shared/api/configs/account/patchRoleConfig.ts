@@ -1,7 +1,7 @@
 import { config } from '../../config'
 
-export const patchRoleConfig = (userId: string, role: Role) =>
-  config<Role>({
-    config: { method: 'patch', data: role },
-    url: `/account/role?userId=${userId}`
+export const patchRoleConfig = (userId: string, dto: ChangeRoleDto) =>
+  config<ChangeRoleDto>({
+    config: { method: 'patch', data: dto },
+    url: `/account/role?userIds=${userId}`
   })

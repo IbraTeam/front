@@ -89,6 +89,10 @@ declare global {
     page: PageResponse
   }
 
+  interface ChangeRoleDto {
+    role: Role
+  }
+
   interface RequestDTO {
     id: string
     name: string

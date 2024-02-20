@@ -1,13 +1,19 @@
 .cell {
   width: 200px;
   height: 200px;
-  background-color: var(--primary-focus);
-  border: 1px solid var(--primary-main);
+
+  background-color: var(--info-bg);
+  border: 1px solid var(--info-hover);
 
   padding: 15px;
 
   display: flex;
   flex-direction: column;
+}
+
+.cell.booked {
+  background-color: var(--primary-focus);
+  border: 1px solid var(--primary-main);
 }
 
 .content {

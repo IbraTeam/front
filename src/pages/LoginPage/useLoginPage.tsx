@@ -19,7 +19,7 @@ export const useLoginPage = () => {
   } = useForm<LoginCredentials>()
 
   const { login } = useUserSwitcherContext()
-  const { isAuth } = useUserContext()
+  const { isAuth, user } = useUserContext()
 
   const { isLoading, requestHandler } = useRequest<TokenResponse, LoginCredentials>({
     onSuccess: async (tokenResponse) => {
@@ -35,7 +35,7 @@ export const useLoginPage = () => {
   })
 
   React.useEffect(() => {
-    if (!isAuth) return
+    if (!isAuth || (user.role !== 'DEAN' && user.role !== 'ADMIN')) return
 
     if (!!location.state?.from) {
       navigate(location.state.from)

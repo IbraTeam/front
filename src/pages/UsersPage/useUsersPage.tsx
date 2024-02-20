@@ -23,7 +23,10 @@ export const useUsersPage = () => {
     config: getUsersConfig(searchParams.toString())
   })
 
-  const { isLoading: addRoleLoading, requestHandler: addRoleHandler } = useRequest<BaseResponse, Role>({
+  const { isLoading: addRoleLoading, requestHandler: addRoleHandler } = useRequest<
+    BaseResponse,
+    ChangeRoleDto
+  >({
     onSuccess: (response) => toastOnSuccessRequest(response.message),
     onError: (error) => toastOnErrorRequest(error || 'Ошибка добавления роли')
   })
@@ -37,7 +40,7 @@ export const useUsersPage = () => {
   })
 
   const onAddRoleClick = (id: string, role: Role) => {
-    addRoleHandler(patchRoleConfig(id, role))
+    addRoleHandler(patchRoleConfig(id, { role }))
   }
 
   const onRemoveRoleClick = (id: string, role: Role) => {
