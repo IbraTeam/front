@@ -28,6 +28,7 @@ export const UsersPage = () => {
       <InputBlock
         defaultValue={nameFilter ?? ''}
         label="Поиск по ФИО"
+        placeholder="Введите часть ФИО..."
         onChange={(event) => onNameFilterChange(event.currentTarget.value)}
       />
 
@@ -39,6 +40,7 @@ export const UsersPage = () => {
           label: RoleEnum[category as Role] || '',
           value: category
         }))}
+        placeholder="Выберите роли..."
         onChange={onRolesChange}
         styles={selectStyles<RoleOption, true>()}
       />

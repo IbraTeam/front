@@ -1,12 +1,10 @@
 import { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { apiInstance, requestInstance } from '@/shared/api'
+import { apiInstance, vitalInstance } from '@/shared/api'
 import { USER_INFO_KEY } from '@/shared/const'
 import { useUserContext, useUserSwitcherContext } from '@/shared/lib/contexts'
 
 export const AxiosInterceptor = ({ children }: { children: React.ReactNode }) => {
-  const navigate = useNavigate()
   const [isSet, setIsSet] = React.useState(false)
 
   const { isAuth } = useUserContext()
@@ -29,7 +27,7 @@ export const AxiosInterceptor = ({ children }: { children: React.ReactNode }) =>
       errorResponseInterceptor
     )
 
-    const requestResponseInterceptors = requestInstance.interceptors.response.use(
+    const vitalResponseInterceptors = vitalInstance.interceptors.response.use(
       successResponseInterceptor,
       errorResponseInterceptor
     )
@@ -38,7 +36,6 @@ export const AxiosInterceptor = ({ children }: { children: React.ReactNode }) =>
 
     const successRequestInterceptor = (config: InternalAxiosRequestConfig) => {
       const userInfo = JSON.parse(localStorage.getItem(USER_INFO_KEY) ?? '')
-
       if (!!userInfo) config.headers.Authorization = `Bearer ${userInfo.token}`
 
       return config
@@ -49,7 +46,7 @@ export const AxiosInterceptor = ({ children }: { children: React.ReactNode }) =>
       errorRequestInterceptor
     )
 
-    const requestRequestInterceptors = requestInstance.interceptors.request.use(
+    const vitalRequestInterceptors = vitalInstance.interceptors.request.use(
       successRequestInterceptor,
       errorRequestInterceptor
     )
@@ -58,10 +55,10 @@ export const AxiosInterceptor = ({ children }: { children: React.ReactNode }) =>
       apiInstance.interceptors.response.eject(responseInterceptors)
       apiInstance.interceptors.request.eject(requestInterceptors)
 
-      requestInstance.interceptors.response.eject(requestResponseInterceptors)
-      requestInstance.interceptors.request.eject(requestRequestInterceptors)
+      vitalInstance.interceptors.response.eject(vitalResponseInterceptors)
+      vitalInstance.interceptors.request.eject(vitalRequestInterceptors)
     }
-  }, [navigate])
+  }, [])
 
   return isSet && children
 }

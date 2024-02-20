@@ -1,6 +1,6 @@
 import { AxiosError, AxiosRequestConfig } from 'axios'
 import React from 'react'
-import { apiInstance, requestInstance } from '@/shared/api'
+import { apiInstance, vitalInstance } from '@/shared/api'
 import { statusCodeErrors } from '@/shared/const'
 import { parseFormResponseErrors } from '../helpers/parseFormErrorErrors'
 
@@ -11,7 +11,7 @@ interface UseRequestParams<T, D> {
   onSuccess?: (data: T) => void
   onError?: (error?: string) => void
   onFormError?: (errors: FormError<D>[]) => void
-  instance?: 'api' | 'request'
+  instance?: 'api' | 'vital'
 }
 
 export const useRequest = <T, D = never>({
@@ -40,7 +40,7 @@ export const useRequest = <T, D = never>({
       if (instance === 'api') {
         response = await apiInstance(config)
       } else {
-        response = await requestInstance(config)
+        response = await vitalInstance(config)
       }
 
       setStatusCode(response.status)

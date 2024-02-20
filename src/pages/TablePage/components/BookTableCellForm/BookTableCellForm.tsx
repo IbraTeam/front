@@ -37,7 +37,7 @@ export const BookTableCellForm = ({ dateTime, pairNumber }: BookTableCellFormPro
           <AsyncSelect
             ref={ref}
             className={styles.select}
-            placeholder="Выберете учителя"
+            placeholder="Выберите учителя"
             loadOptions={fetchTeachers}
             onChange={(newValue) => onChange(newValue?.value)}
             loadingMessage={() => 'Загрузка...'}
@@ -59,7 +59,7 @@ export const BookTableCellForm = ({ dateTime, pairNumber }: BookTableCellFormPro
           <Select
             ref={ref}
             className={styles.select}
-            placeholder="Выберете ключ"
+            placeholder="Выберите ключ"
             isSearchable
             isLoading={keysLoading}
             loadingMessage={() => 'Загрузка...'}

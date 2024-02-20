@@ -53,7 +53,7 @@ export const TableCell = ({ request, pairNumber, date }: TableCellProps) => {
               onClose={() => setOpenModal(false)}
               classNames={{ modal: styles.modal }}
             >
-              <div>
+              <div className={styles.modal__content}>
                 <BookTableCellForm dateTime={date} pairNumber={pairNumber} />
               </div>
             </Modal>

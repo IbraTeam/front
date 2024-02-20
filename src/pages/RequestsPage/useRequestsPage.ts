@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom'
 import { MultiValue, SingleValue } from 'react-select'
 import { getRequestConfig, postRequestRequestIdConfig } from '@/shared/api'
-import { PairNumberOption, StatusOption, TypeBookingOption } from '@/shared/const'
+import { StatusOption, TypeBookingOption } from '@/shared/const'
 import {
   convertDateToBackendFormat,
   getStartOfNextWeek,
@@ -15,7 +15,6 @@ export const useRequestsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const weekStart = searchParams.get('weekStart')
-  const pairNumbers = searchParams.getAll('pairNumber')
   const statuses = searchParams.getAll('status')
   const bookingType = searchParams.get('type')
 
@@ -26,7 +25,7 @@ export const useRequestsPage = () => {
   } = useRequest<TableDTO>({
     onMount: true,
     config: getRequestConfig(searchParams.toString()),
-    instance: 'request'
+    instance: 'vital'
   })
 
   const { isLoading: changeRequestLoading, requestHandler: changeRequestHandler } = useRequest<
@@ -34,15 +33,16 @@ export const useRequestsPage = () => {
     AcceptOrCancelRequestDTO
   >({
     onSuccess: () => toastOnSuccessRequest('Операция по заявке совершена успешно'),
-    instance: 'request'
+    instance: 'vital'
   })
 
   const invalidateRequests = () => {
-    const copySearchParams = new URLSearchParams(searchParams)
-    copySearchParams.set(
-      'weekStart',
-      convertDateToBackendFormat(copySearchParams.get('weekStart') ?? '')
-    )
+    const copySearchParams = new URLSearchParams(searchParams.toString())
+
+    const startOfWeek = searchParams.get('weekStart')
+    if (!!startOfWeek) {
+      copySearchParams.set('weekStart', convertDateToBackendFormat(startOfWeek))
+    }
 
     getRequestsHandler(getRequestConfig(copySearchParams.toString()))
   }
@@ -61,18 +61,6 @@ export const useRequestsPage = () => {
     const startOfWeek = getStartOfWeek(newWeekStart)
 
     searchParams.set('weekStart', startOfWeek)
-    setSearchParams(searchParams)
-
-    invalidateRequests()
-  }
-
-  const onPairNumbersChange = (selectedPairNumbers: MultiValue<PairNumberOption>) => {
-    searchParams.delete('pairNumber')
-
-    selectedPairNumbers.forEach((pairNumber) => {
-      searchParams.append('pairNumber', pairNumber.value)
-    })
-
     setSearchParams(searchParams)
 
     invalidateRequests()
@@ -133,12 +121,10 @@ export const useRequestsPage = () => {
     onRejectRequestClick,
     changeRequestLoading,
     weekStart,
-    pairNumbers,
     statuses,
     bookingType,
     onStatusesChange,
     onBookingTypeChange,
-    onWeekStartChange,
-    onPairNumbersChange
+    onWeekStartChange
   }
 }

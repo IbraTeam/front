@@ -32,7 +32,8 @@ export const useBookTableCellForm = ({ dateTime, pairNumber }: UseBookTableCellF
     CreatePair
   >({
     onSuccess: () => toastOnSuccessRequest('Пара успешно создана'),
-    onError: (error) => toastOnErrorRequest(error ?? 'Ошибка создания пары')
+    onError: (error) => toastOnErrorRequest(error ?? 'Ошибка создания пары'),
+    instance: 'vital'
   })
 
   const { isLoading: keysLoading, data: keys } = useRequest<KeyDto[]>({

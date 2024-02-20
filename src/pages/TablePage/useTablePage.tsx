@@ -22,7 +22,7 @@ export const useTablePage = () => {
     config: getRequestApprovedConfig(
       `${weekStart ? `weekStart=${convertDateToBackendFormat(weekStart)}` : ''}`
     ),
-    instance: 'request'
+    instance: 'vital'
   })
 
   const table = React.useMemo(() => (tableResponse ? getTable(tableResponse) : []), [tableResponse])
@@ -33,7 +33,9 @@ export const useTablePage = () => {
     searchParams.set('weekStart', convertDateToFrontendFormat(tableResponse.weekEnd) ?? '')
     setSearchParams(searchParams)
 
-    tableHandler(getRequestApprovedConfig(`weekStart=${tableResponse.weekEnd}`))
+    tableHandler(
+      getRequestApprovedConfig(`weekStart=${convertDateToBackendFormat(tableResponse.weekEnd)}`)
+    )
   }
 
   const onPreviousWeekClick = () => {

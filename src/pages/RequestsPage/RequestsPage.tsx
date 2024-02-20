@@ -1,9 +1,6 @@
 import Select from 'react-select'
 import { InputBlock, SearchLoader } from '@/shared/components'
 import {
-  PairNumberEnum,
-  PairNumberOption,
-  pairNumberOptions,
   selectStyles,
   StatusEnum,
   StatusOption,
@@ -26,9 +23,7 @@ export const RequestsPage = () => {
     onStatusesChange,
     onBookingTypeChange,
     onWeekStartChange,
-    onPairNumbersChange,
     bookingType,
-    pairNumbers,
     statuses,
     requests,
     requestsLoading,
@@ -41,7 +36,7 @@ export const RequestsPage = () => {
         Заявки
       </Typography>
 
-      <Typography>Выберете день недели (выведутся заявки со всей недели)</Typography>
+      <Typography>Выберите день недели (выведутся заявки со всей недели)</Typography>
       <div className={styles.top}>
         <Button className="btn" onClick={() => onPreviousWeekClick()}>
           Пред. неделя
@@ -62,7 +57,7 @@ export const RequestsPage = () => {
       <Select
         className={styles.select}
         options={typeBookingOptions}
-        placeholder="Выберете тип заявки"
+        placeholder="Выберите тип заявки"
         isSearchable={false}
         value={{
           label: TypeBookingEnum[bookingType as TypeBooking] || '',
@@ -74,7 +69,7 @@ export const RequestsPage = () => {
       <Select
         className={styles.select}
         options={statusOptions}
-        placeholder="Выберете статус заявки"
+        placeholder="Выберите статус заявки"
         isSearchable={false}
         isMulti
         value={statuses.map((status: string) => ({
@@ -83,21 +78,6 @@ export const RequestsPage = () => {
         }))}
         onChange={onStatusesChange}
         styles={selectStyles<StatusOption, true>()}
-      />
-
-      <Select
-        className={styles.select}
-        options={pairNumberOptions}
-        placeholder="Выберете номер пары"
-        isSearchable={true}
-        isMulti
-        value={pairNumbers.map((pairNumber: string) => ({
-          label: PairNumberEnum[pairNumber as PairNumber] || '',
-          value: pairNumber
-        }))}
-        onChange={onPairNumbersChange}
-        styles={selectStyles<PairNumberOption, true>()}
-        maxMenuHeight={150}
       />
 
       {requestsLoading && <SearchLoader />}

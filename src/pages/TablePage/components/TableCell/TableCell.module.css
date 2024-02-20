@@ -23,3 +23,7 @@
 .modal {
   width: 500px;
 }
+
+.modal__content {
+  padding-top: 40px;
+}
