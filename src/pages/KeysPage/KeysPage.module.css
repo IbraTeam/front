@@ -8,3 +8,19 @@
   width: 200px;
   margin: 0px;
 }
+
+.title {
+  margin: 20px 0;
+}
+
+.key {
+  width: 300px;
+  padding: 15px;
+  border-radius: 20px;
+  background-color: var(--primary-focus);
+  border: 1px solid var(--primary-main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+}

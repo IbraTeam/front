@@ -32,13 +32,14 @@ export const KeysPage = () => {
         </Button>
       </form>
 
-      <Typography>Ключи</Typography>
+      <Typography tag="h2" variant="h2" className={styles.title}>
+        Ключи
+      </Typography>
       {keysLoading && <SearchLoader />}
       {keys?.map((key) => (
-        <div>
-          <MapPinIcon />
+        <div className={styles.key}>
           <Typography tag="p" variant="t4">
-            Аудитория: <Typography tag="span">{key.room}</Typography>
+            <MapPinIcon /> Аудитория: <Typography tag="span">{key.room}</Typography>
           </Typography>
 
           {key.userName && (

@@ -59,6 +59,7 @@ export const RequestsPage = () => {
         options={typeBookingOptions}
         placeholder="Выберите тип заявки"
         isSearchable={false}
+        defaultValue={undefined}
         value={{
           label: TypeBookingEnum[bookingType as TypeBooking] || '',
           value: bookingType
