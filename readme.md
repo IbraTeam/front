@@ -2,5 +2,13 @@
 
 ## Как запустить проект:
 
-- `npm run preview` - для запуска build версии
+- в корне добавить .env с содержимым:
+
+```
+VITE_BACKEND_URL='http://95.163.229.215:8080'
+VITE_VITAL_BACKEND_URL='http://95.163.229.215:8081'
+```
+
+- `npm i`
 - `npm run dev` - для запуска dev версии
+- `npm run preview` - для запуска build версии
