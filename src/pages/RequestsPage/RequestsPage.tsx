@@ -36,7 +36,9 @@ export const RequestsPage = () => {
         Заявки
       </Typography>
 
-      <Typography>Выберите день недели (выведутся заявки со всей недели)</Typography>
+      <Typography className={styles.selectDay}>
+        Выберите день недели (выведутся заявки со всей недели)
+      </Typography>
       <div className={styles.top}>
         <Button className="btn" onClick={() => onPreviousWeekClick()}>
           Пред. неделя
@@ -53,7 +55,7 @@ export const RequestsPage = () => {
           След. неделя
         </Button>
       </div>
-
+      <Typography>Выберите тип заявки</Typography>
       <Select
         className={styles.select}
         options={typeBookingOptions}
@@ -67,10 +69,11 @@ export const RequestsPage = () => {
         onChange={onBookingTypeChange}
       />
 
+      <Typography>Выберите статус заявки</Typography>
       <Select
         className={styles.select}
         options={statusOptions}
-        placeholder="Выберите статус заявки"
+        placeholder=""
         isSearchable={false}
         isMulti
         value={statuses.map((status: string) => ({

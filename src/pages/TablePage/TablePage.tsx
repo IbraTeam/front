@@ -12,7 +12,7 @@ export const TablePage = () => {
     <div className={styles.wrapper}>
       {tableLoading && <SearchLoader />}
       <div className={styles.days}>
-        <Button alertType="primary" onClick={onPreviousWeekClick}>
+        <Button alertType="primary" onClick={onPreviousWeekClick} className={styles.weekBtn}>
           «
         </Button>
         {table.map((day, dayIndex) => (
@@ -27,12 +27,12 @@ export const TablePage = () => {
             </Typography>
             <div className={styles.pairs}>
               {day.map((cell) => (
-                <TableCell date={cell.date} request={cell.request} pairNumber={cell.pairNumber} />
+                <TableCell date={cell.date} requests={cell.requests} pairNumber={cell.pairNumber} />
               ))}
             </div>
           </div>
         ))}
-        <Button alertType="primary" onClick={onNextWeekClick}>
+        <Button alertType="primary" onClick={onNextWeekClick} className={styles.weekBtn}>
           »
         </Button>
       </div>

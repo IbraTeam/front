@@ -36,33 +36,35 @@ export const KeysPage = () => {
         Ключи
       </Typography>
       {keysLoading && <SearchLoader />}
-      {keys?.map((key) => (
-        <div className={styles.key}>
-          <Typography tag="p" variant="t4">
-            <MapPinIcon /> Аудитория: <Typography tag="span">{key.room}</Typography>
-          </Typography>
-
-          {key.userName && (
+      <div className={styles.keys}>
+        {keys?.map((key) => (
+          <div className={styles.key}>
             <Typography tag="p" variant="t4">
-              Владелец: <Typography tag="span">{key.userName}</Typography>
+              <MapPinIcon /> Аудитория: <Typography tag="span">{key.room}</Typography>
             </Typography>
-          )}
 
-          <Typography tag="p" variant="t4">
-            Статус: <Typography tag="span">{KeyStatusEnum[key.transferStatus]}</Typography>
-          </Typography>
+            {key.userName && (
+              <Typography tag="p" variant="t4">
+                Владелец: <Typography tag="span">{key.userName}</Typography>
+              </Typography>
+            )}
 
-          <Button
-            disabled={removeKeyLoading}
-            className="btn"
-            styleType="solid"
-            alertType="danger"
-            onClick={() => onRemoveKeyClick(key.id)}
-          >
-            Удалить ключ
-          </Button>
-        </div>
-      ))}
+            <Typography tag="p" variant="t4">
+              Статус: <Typography tag="span">{KeyStatusEnum[key.transferStatus]}</Typography>
+            </Typography>
+
+            <Button
+              disabled={removeKeyLoading}
+              className="btn"
+              styleType="solid"
+              alertType="danger"
+              onClick={() => onRemoveKeyClick(key.id)}
+            >
+              Удалить ключ
+            </Button>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

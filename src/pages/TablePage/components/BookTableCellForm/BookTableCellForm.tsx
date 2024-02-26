@@ -10,9 +10,10 @@ import styles from './BookTableCellForm.module.css'
 export interface BookTableCellFormProps {
   dateTime: string
   pairNumber: PairNumber
+  onBooked: () => void
 }
 
-export const BookTableCellForm = ({ dateTime, pairNumber }: BookTableCellFormProps) => {
+export const BookTableCellForm = ({ dateTime, pairNumber, onBooked }: BookTableCellFormProps) => {
   const {
     onSubmit,
     register,
@@ -24,7 +25,8 @@ export const BookTableCellForm = ({ dateTime, pairNumber }: BookTableCellFormPro
     keysOptions
   } = useBookTableCellForm({
     dateTime,
-    pairNumber
+    pairNumber,
+    onBooked
   })
 
   return (

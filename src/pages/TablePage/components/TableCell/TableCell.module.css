@@ -1,6 +1,6 @@
 .cell {
   width: 200px;
-  height: 200px;
+  height: 280px;
 
   background-color: var(--info-bg);
   border: 1px solid var(--info-hover);
@@ -14,6 +14,10 @@
 .cell.booked {
   background-color: var(--primary-focus);
   border: 1px solid var(--primary-main);
+}
+
+.seeAll {
+  margin-top: 20px;
 }
 
 .content {

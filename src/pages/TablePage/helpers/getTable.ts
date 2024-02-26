@@ -22,12 +22,12 @@ export const getTable = (tableResponse: TableDTO) => {
     day.map((pair) => {
       const currentDay = format(add(weekStartDate, { days: dayIndex }), 'yyyy-MM-dd')
 
-      const request = tableResponse.requests.find(
+      const requests = tableResponse.requests.filter(
         (request) =>
           getFrontendDateFromDateTime(request.dateTime) === currentDay && request.pairNumber === pair
       )
 
-      return { date: currentDay, pairNumber: pair, request }
+      return { date: currentDay, pairNumber: pair, requests }
     })
   )
 }

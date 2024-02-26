@@ -22,3 +22,19 @@
   align-items: center;
   gap: 20px;
 }
+
+.selectDay {
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 776px) {
+  .top {
+    margin: 20px 0;
+    flex-direction: column;
+    gap: 0px;
+  }
+
+  .select {
+    width: 100%;
+  }
+}

@@ -2,7 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import {
   apiInstance,
-  getAudienceKeyGetAllConfig,
+  getRequestFreeConfig,
   getUsersConfig,
   postRequestCreatePairConfig
 } from '@/shared/api'
@@ -14,11 +14,12 @@ import { getTeachersOptions } from './helpers/getTeachersOptions'
 export interface UseBookTableCellFormParams {
   dateTime: string
   pairNumber: PairNumber
+  onBooked: () => void
 }
 
 export type BookTableCellSchema = Omit<CreatePair, 'dateTime' | 'pairNumber'>
 
-export const useBookTableCellForm = ({ dateTime, pairNumber }: UseBookTableCellFormParams) => {
+export const useBookTableCellForm = ({ dateTime, pairNumber, onBooked }: UseBookTableCellFormParams) => {
   const {
     handleSubmit,
     register,
@@ -31,15 +32,32 @@ export const useBookTableCellForm = ({ dateTime, pairNumber }: UseBookTableCellF
     BaseResponse,
     CreatePair
   >({
-    onSuccess: () => toastOnSuccessRequest('Пара успешно создана'),
+    onSuccess: () => {
+      toastOnSuccessRequest('Пара успешно создана')
+      onBooked()
+    },
     onError: (error) => toastOnErrorRequest(error ?? 'Ошибка создания пары'),
     instance: 'vital'
   })
 
-  const { isLoading: keysLoading, data: keys } = useRequest<KeyDto[]>({
+  const {
+    isLoading: keysLoading,
+    data: keys,
+    requestHandler: keysHandler
+  } = useRequest<KeyDto[]>({
     onMount: true,
-    config: getAudienceKeyGetAllConfig()
+    config: getRequestFreeConfig(`bookingTime=${dateTime}&pairNumber=${pairNumber}`)
   })
+
+  React.useEffect(() => {
+    keysHandler(
+      getRequestFreeConfig(
+        `bookingTime=${dateTime}&pairNumber=${pairNumber}&${
+          watch('repeatCount') ? `repeatedCount=${watch('repeatCount')}` : ''
+        }`
+      )
+    )
+  }, [watch('repeatCount')])
 
   const keysOptions = React.useMemo(() => (keys ? getKeysOptions(keys) : []), [keys])
 
