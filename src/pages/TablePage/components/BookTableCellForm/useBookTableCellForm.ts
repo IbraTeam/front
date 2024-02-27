@@ -6,7 +6,11 @@ import {
   getUsersConfig,
   postRequestCreatePairConfig
 } from '@/shared/api'
-import { toastOnErrorRequest, toastOnSuccessRequest } from '@/shared/lib/helpers'
+import {
+  convertDateToBackendFormat,
+  toastOnErrorRequest,
+  toastOnSuccessRequest
+} from '@/shared/lib/helpers'
 import { useRequest } from '@/shared/lib/hooks'
 import { getKeysOptions } from './helpers/getKeysOptions'
 import { getTeachersOptions } from './helpers/getTeachersOptions'
@@ -46,17 +50,22 @@ export const useBookTableCellForm = ({ dateTime, pairNumber, onBooked }: UseBook
     requestHandler: keysHandler
   } = useRequest<KeyDto[]>({
     onMount: true,
-    config: getRequestFreeConfig(`bookingTime=${dateTime}&pairNumber=${pairNumber}`)
+    config: getRequestFreeConfig(
+      `bookingTime=${convertDateToBackendFormat(dateTime)}&pairNumber=${pairNumber}&repeatedCount=1`
+    ),
+    instance: 'vital'
   })
 
   React.useEffect(() => {
-    keysHandler(
-      getRequestFreeConfig(
-        `bookingTime=${dateTime}&pairNumber=${pairNumber}&${
-          watch('repeatCount') ? `repeatedCount=${watch('repeatCount')}` : ''
-        }`
+    if (watch('repeatCount')) {
+      keysHandler(
+        getRequestFreeConfig(
+          `bookingTime=${convertDateToBackendFormat(dateTime)}&pairNumber=${pairNumber}&${
+            watch('repeatCount') ? `repeatedCount=${watch('repeatCount')}` : ''
+          }`
+        )
       )
-    )
+    }
   }, [watch('repeatCount')])
 
   const keysOptions = React.useMemo(() => (keys ? getKeysOptions(keys) : []), [keys])

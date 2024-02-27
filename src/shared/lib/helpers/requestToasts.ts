@@ -5,5 +5,5 @@ export const toastOnSuccessRequest = (message?: string) => {
 }
 
 export const toastOnErrorRequest = (error: string) => {
-  toast.error(error, { autoClose: false })
+  toast.error(error, { autoClose: 2000 })
 }

@@ -31,6 +31,20 @@ export const BookTableCellForm = ({ dateTime, pairNumber, onBooked }: BookTableC
 
   return (
     <form onSubmit={onSubmit}>
+      <InputBlock
+        label="Количество недель"
+        error={errors.repeatCount?.message}
+        {...register('repeatCount', validations.repeatCount)}
+        ref={register('repeatCount', validations.repeatCount).ref}
+      />
+
+      <InputBlock
+        label="Название пары"
+        error={errors.pairName?.message}
+        {...register('pairName', validations.pairName)}
+        ref={register('pairName', validations.pairName).ref}
+      />
+
       <Controller
         control={control}
         defaultValue={undefined}
@@ -77,21 +91,12 @@ export const BookTableCellForm = ({ dateTime, pairNumber, onBooked }: BookTableC
         </Typography>
       )}
 
-      <InputBlock
-        label="Количество недель"
-        error={errors.repeatCount?.message}
-        {...register('repeatCount', validations.repeatCount)}
-        ref={register('repeatCount', validations.repeatCount).ref}
-      />
-
-      <InputBlock
-        label="Название пары"
-        error={errors.pairName?.message}
-        {...register('pairName', validations.pairName)}
-        ref={register('pairName', validations.pairName).ref}
-      />
-
-      <Button styleType="outlined" alertType="success" isLoading={createPairLoading}>
+      <Button
+        styleType="outlined"
+        alertType="success"
+        isLoading={createPairLoading}
+        className={styles.button}
+      >
         Создать пару
       </Button>
     </form>

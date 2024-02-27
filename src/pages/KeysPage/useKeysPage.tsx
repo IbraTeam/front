@@ -33,7 +33,8 @@ export const useKeysPage = () => {
   })
 
   const onSubmit = handleSubmit(async (data) => {
-    createKeyHandler(postAudienceKeyConfig(data))
+    await createKeyHandler(postAudienceKeyConfig(data))
+    getKeysHandler(getAudienceKeyGetAllConfig())
   })
 
   const onRemoveKeyClick = async (keyId: string) => {

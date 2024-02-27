@@ -39,12 +39,18 @@ export const useUsersPage = () => {
     onError: (error) => toastOnErrorRequest(error || 'Ошибка удаления роли')
   })
 
-  const onAddRoleClick = (id: string, role: Role) => {
-    addRoleHandler(patchRoleConfig(id, { role }))
+  const invalidateUsers = () => {
+    getUsersHandler(getUsersConfig(searchParams.toString()))
   }
 
-  const onRemoveRoleClick = (id: string, role: Role) => {
-    removeRoleHandler(deleteRoleConfig(id, { role }))
+  const onAddRoleClick = async (id: string, role: Role) => {
+    await addRoleHandler(patchRoleConfig(id, { role }))
+    invalidateUsers()
+  }
+
+  const onRemoveRoleClick = async (id: string, role: Role) => {
+    await removeRoleHandler(deleteRoleConfig(id, { role }))
+    invalidateUsers()
   }
 
   const onNameFilterChange = useDebounceCallback((value: string) => {
@@ -53,7 +59,7 @@ export const useUsersPage = () => {
 
     setSearchParams(searchParams)
 
-    getUsersHandler(getUsersConfig(searchParams.toString()))
+    invalidateUsers()
   }, NAME_FILTER_DURATION)
 
   const onRolesChange = (selectedRoles: MultiValue<RoleOption>) => {
@@ -65,14 +71,14 @@ export const useUsersPage = () => {
 
     setSearchParams(searchParams)
 
-    getUsersHandler(getUsersConfig(searchParams.toString()))
+    invalidateUsers()
   }
 
   const onPageChange = (page: number) => {
     searchParams.set('page', String(page))
     setSearchParams(searchParams)
 
-    getUsersHandler(getUsersConfig(searchParams.toString()))
+    invalidateUsers()
   }
 
   return {

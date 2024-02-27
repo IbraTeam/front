@@ -7,6 +7,7 @@ import {
   getStartOfNextWeek,
   getStartOfPreviousWeek,
   getStartOfWeek,
+  toastOnErrorRequest,
   toastOnSuccessRequest
 } from '@/shared/lib/helpers'
 import { useRequest } from '@/shared/lib/hooks'
@@ -33,6 +34,7 @@ export const useRequestsPage = () => {
     AcceptOrCancelRequestDTO
   >({
     onSuccess: () => toastOnSuccessRequest('Операция по заявке совершена успешно'),
+    onError: (error) => toastOnErrorRequest(error || 'Ошибка изменения статуса заявки'),
     instance: 'vital'
   })
 
