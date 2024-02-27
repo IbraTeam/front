@@ -38,3 +38,8 @@
   background-color: var(--success-bg);
   border-color: var(--success-primary);
 }
+
+.card.issued {
+  background-color: var(--neutral-30);
+  border-color: var(--neutral-90);
+}

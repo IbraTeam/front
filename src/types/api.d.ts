@@ -3,7 +3,7 @@ export {}
 declare global {
   type Role = 'TEACHER' | 'STUDENT' | 'DEAN' | 'ADMIN' | 'USER'
   type KeyStatus = 'IN_DEAN' | 'ON_HANDS' | 'TRANSFERRING' | 'OFFERING_TO_YOU'
-  type Status = 'Accepted' | 'Rejected' | 'Pending'
+  type Status = 'Accepted' | 'Rejected' | 'Pending' | 'Issued'
   type PairNumber =
     | 'First'
     | 'Second'

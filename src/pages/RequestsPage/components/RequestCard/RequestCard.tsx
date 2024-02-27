@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind'
-import { CheckCircleIcon, CircleEllipsisIcon, XCircleIcon } from 'lucide-react'
+import { CheckCircleIcon, CircleEllipsisIcon, DoorClosedIcon, RefreshCcwDotIcon, XCircleIcon } from 'lucide-react'
 import { PairNumberTime, StatusEnum, TypeBookingEnum } from '@/shared/const'
 import { getDateFromDateTime } from '@/shared/lib/helpers'
 import { Button, Typography } from '@/shared/uikit'
@@ -23,7 +23,8 @@ export const RequestCard = ({
       styles.card,
       request.status === 'Accepted' && styles.accepted,
       request.status === 'Pending' && styles.pending,
-      request.status === 'Rejected' && styles.rejected
+      request.status === 'Rejected' && styles.rejected,
+      request.status === 'Issued' && styles.issued
     )}
   >
     <div className={styles.top}>
@@ -31,6 +32,7 @@ export const RequestCard = ({
         {request.status === 'Accepted' && <CheckCircleIcon color="var(--success-primary)" />}
         {request.status === 'Pending' && <CircleEllipsisIcon color="var(--info-primary)" />}
         {request.status === 'Rejected' && <XCircleIcon color="var(--danger-primary)" />}
+        {request.status === 'Issued' && <RefreshCcwDotIcon color="var(--neutral-100)" />}
         <Typography tag="p" variant="t4">
           {StatusEnum[request.status]}
         </Typography>

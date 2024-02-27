@@ -44,13 +44,15 @@ export interface TypeBookingOption {
 export enum StatusEnum {
   Pending = 'Ожидает',
   Accepted = 'Принят',
-  Rejected = 'Отклонен'
+  Rejected = 'Отклонен',
+  Issued = 'Закрыт'
 }
 
 export const statusOptions: StatusOption[] = [
   { label: StatusEnum.Pending, value: 'Pending' },
   { label: StatusEnum.Accepted, value: 'Accepted' },
-  { label: StatusEnum.Rejected, value: 'Rejected' }
+  { label: StatusEnum.Rejected, value: 'Rejected' },
+  { label: StatusEnum.Issued, value: 'Issued' }
 ]
 
 export interface StatusOption {
