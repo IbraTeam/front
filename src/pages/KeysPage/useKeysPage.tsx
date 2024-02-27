@@ -7,7 +7,8 @@ export const useKeysPage = () => {
   const {
     handleSubmit,
     register,
-    formState: { errors }
+    formState: { errors },
+    reset
   } = useForm<CreateAudienceKeyDto>()
 
   const {
@@ -34,6 +35,7 @@ export const useKeysPage = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     await createKeyHandler(postAudienceKeyConfig(data))
+    reset({ room: '' })
     getKeysHandler(getAudienceKeyGetAllConfig())
   })
 
