@@ -129,4 +129,9 @@ declare global {
     keyId: string
     pairName: string
   }
+
+  interface VitalKeyDto {
+    name: string
+    keyId: string
+  }
 }

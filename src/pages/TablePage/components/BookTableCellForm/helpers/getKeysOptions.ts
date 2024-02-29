@@ -1,1 +1,2 @@
-export const getKeysOptions = (keys: KeyDto[]) => keys.map((key) => ({ label: key.room, value: key.id }))
+export const getKeysOptions = (keys: VitalKeyDto[]) =>
+  keys.map((key) => ({ label: key.name, value: key.keyId }))
