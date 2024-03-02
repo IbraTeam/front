@@ -33,6 +33,7 @@ export const BookTableCellForm = ({ dateTime, pairNumber, onBooked }: BookTableC
     <form onSubmit={onSubmit}>
       <InputBlock
         label="Количество недель"
+        type="number"
         error={errors.repeatCount?.message}
         {...register('repeatCount', validations.repeatCount)}
         ref={register('repeatCount', validations.repeatCount).ref}
