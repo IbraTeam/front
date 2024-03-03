@@ -54,7 +54,7 @@ export const BookTableCellForm = ({ dateTime, pairNumber, onBooked }: BookTableC
           <AsyncSelect
             ref={ref}
             className={styles.select}
-            placeholder="Выберите учителя"
+            placeholder="Начните вводить ФИО учителя"
             loadOptions={fetchTeachers}
             onChange={(newValue) => onChange(newValue?.value)}
             loadingMessage={() => 'Загрузка...'}

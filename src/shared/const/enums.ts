@@ -99,9 +99,7 @@ export const PairNumberTime = {
   Fifth: '15:45-17:20',
   Sixth: '17:30-19:05',
   Seventh: '19:15-20:50',
-  Eighth: '20:55-22:30',
-  Ninth: '22:40-00:15',
-  Ten: '00:25-01:00'
+  Eighth: '20:55-22:30'
 } as const
 
 export const DayNumber: Record<number, string> = {
