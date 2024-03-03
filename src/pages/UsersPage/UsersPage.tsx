@@ -1,6 +1,6 @@
 import Select from 'react-select'
 import { InputBlock, Pagination, SearchLoader } from '@/shared/components'
-import { RoleEnum, RoleOption, roleOptions, selectStyles } from '@/shared/const'
+import { RoleEnum, RoleEnumType, RoleOption, roleOptions, selectStyles } from '@/shared/const'
 import { Typography } from '@/shared/uikit'
 import { UserCard } from './components/UserCard/UserCard'
 import { useUsersPage } from './useUsersPage'
@@ -37,7 +37,7 @@ export const UsersPage = () => {
         isSearchable={false}
         isMulti
         value={roles.map((category: string) => ({
-          label: RoleEnum[category as Role] || '',
+          label: RoleEnum[category as RoleEnumType] || '',
           value: category
         }))}
         placeholder="Выберите роли..."

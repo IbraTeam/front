@@ -1,18 +1,7 @@
 import { add, format } from 'date-fns'
 import { getFrontendDateFromDateTime } from '@/shared/lib/helpers'
 
-const pairs: PairNumber[] = [
-  'First',
-  'Second',
-  'Third',
-  'Fourth',
-  'Fifth',
-  'Sixth',
-  'Seventh',
-  'Eighth',
-  'Ninth',
-  'Ten'
-]
+const pairs: PairNumber[] = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth']
 
 export const getTable = (tableResponse: TableDTO) => {
   const weekStartDate = getFrontendDateFromDateTime(tableResponse.weekStart)

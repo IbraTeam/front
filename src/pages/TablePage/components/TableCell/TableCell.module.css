@@ -31,3 +31,15 @@
 .modal__content {
   padding-top: 20px;
 }
+
+@media screen and (max-width: 776px) {
+  .modal {
+    width: 350px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .modal {
+    width: 290px;
+  }
+}
