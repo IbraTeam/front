@@ -15,6 +15,10 @@ export const RenderHeader = () => {
   const { isAuth, user } = useUserContext()
   const { logout } = useUserSwitcherContext()
 
+  React.useEffect(() => {
+    if (activeNav) toggleActiveNav()
+  }, [navigate])
+
   const { requestHandler: logoutRequest } = useRequest<never>({
     onSuccess: () => {
       logout()

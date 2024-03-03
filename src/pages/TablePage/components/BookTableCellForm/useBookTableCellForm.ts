@@ -48,7 +48,7 @@ export const useBookTableCellForm = ({ dateTime, pairNumber, onBooked }: UseBook
     isLoading: keysLoading,
     data: keys,
     requestHandler: keysHandler
-  } = useRequest<KeyDto[]>({
+  } = useRequest<VitalKeyDto[]>({
     onMount: true,
     config: getRequestFreeConfig(
       `bookingTime=${convertDateToBackendFormat(dateTime)}&pairNumber=${pairNumber}&repeatedCount=1`

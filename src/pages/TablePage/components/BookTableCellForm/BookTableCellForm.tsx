@@ -33,6 +33,7 @@ export const BookTableCellForm = ({ dateTime, pairNumber, onBooked }: BookTableC
     <form onSubmit={onSubmit}>
       <InputBlock
         label="Количество недель"
+        type="number"
         error={errors.repeatCount?.message}
         {...register('repeatCount', validations.repeatCount)}
         ref={register('repeatCount', validations.repeatCount).ref}
@@ -53,7 +54,7 @@ export const BookTableCellForm = ({ dateTime, pairNumber, onBooked }: BookTableC
           <AsyncSelect
             ref={ref}
             className={styles.select}
-            placeholder="Выберите учителя"
+            placeholder="Начните вводить ФИО учителя"
             loadOptions={fetchTeachers}
             onChange={(newValue) => onChange(newValue?.value)}
             loadingMessage={() => 'Загрузка...'}

@@ -4,17 +4,7 @@ declare global {
   type Role = 'TEACHER' | 'STUDENT' | 'DEAN' | 'ADMIN' | 'USER'
   type KeyStatus = 'IN_DEAN' | 'ON_HANDS' | 'TRANSFERRING' | 'OFFERING_TO_YOU'
   type Status = 'Accepted' | 'Rejected' | 'Pending' | 'Issued'
-  type PairNumber =
-    | 'First'
-    | 'Second'
-    | 'Third'
-    | 'Fourth'
-    | 'Fifth'
-    | 'Sixth'
-    | 'Seventh'
-    | 'Eighth'
-    | 'Ninth'
-    | 'Ten'
+  type PairNumber = 'First' | 'Second' | 'Third' | 'Fourth' | 'Fifth' | 'Sixth' | 'Seventh' | 'Eighth'
 
   interface BaseResponse {
     message: string
@@ -128,5 +118,10 @@ declare global {
     teacherId: string
     keyId: string
     pairName: string
+  }
+
+  interface VitalKeyDto {
+    name: string
+    keyId: string
   }
 }
